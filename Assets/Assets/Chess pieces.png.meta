@@ -70,7 +70,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 2
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -81,7 +81,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -435,7 +435,19 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Chess pieces_0: 4290227012982397767
+      Chess pieces_1: -4207080564689829018
+      Chess pieces_10: 2103904917535888740
+      Chess pieces_11: 1601188636494797691
+      Chess pieces_2: -3922031433818100433
+      Chess pieces_3: 1793495809444249157
+      Chess pieces_4: 6534529132920143040
+      Chess pieces_5: 7417506733958866183
+      Chess pieces_6: 1116432840154992487
+      Chess pieces_7: -1300669655612516030
+      Chess pieces_8: -2678607097233742274
+      Chess pieces_9: 3089926397826008443
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
