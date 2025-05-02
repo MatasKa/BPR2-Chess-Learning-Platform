@@ -1,29 +1,54 @@
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
-    private Vector3 offset;
-    private bool selected = false;
+    [SerializeField] protected Vector2Int currentSquare;
+    protected Board board;
+    protected bool selected = false;
+    protected bool captured = false;
+    [SerializeField] protected bool white = false;
 
+    void Start()
+    {
+        board = FindAnyObjectByType<Board>();
+    }
     private void OnMouseDown()
     {
-        Vector3 mouseScreenPosition = Input.mousePosition;
-        offset = transform.position - Camera.main.ScreenToWorldPoint(mouseScreenPosition);
+        Debug.Log("tipo pasirinktas");
         selected = true;
-        Debug.Log(gameObject.name + " is selected");
+        PossibleMoves();
     }
 
-    private void OnMouseUp()
+    public bool IsSelected()
     {
-        selected = false;
+        return selected;
     }
 
-    private void Update()
+    public bool IsWhite()
     {
-        if (selected)
-        {
-            Vector3 mouseScreenPosition = Input.mousePosition;
-            transform.position = Camera.main.ScreenToWorldPoint(mouseScreenPosition) + offset;
-        }
+        return selected;
+    }
+
+    public void SetCaptured(bool cap)
+    {
+        captured = cap;
+    }
+    public bool IsCaptured()
+    {
+        return captured;
+    }
+    public virtual void PossibleMoves()
+    {
+        board.ResetHighlights();
+    }
+
+    public void SetCurrentSquare(Vector2Int square)
+    {
+        currentSquare = square;
+    }
+    public Vector2Int GetCurrentSquare()
+    {
+        return currentSquare;
     }
 }
