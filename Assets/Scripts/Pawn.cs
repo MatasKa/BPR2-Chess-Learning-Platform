@@ -3,25 +3,33 @@ using UnityEngine.InputSystem.iOS;
 
 public class Pawn : Piece
 {
-    Vector2Int[] AttackDir = new Vector2Int[]
-{
-        new Vector2Int(-1, +1),
-        new Vector2Int(+1, +1),
-    };
+
     private bool FirstMove = true;
 
     public override void PossibleMoves()
     {
         base.PossibleMoves();
 
+        int reverse = 1;
+        if (white == false)
+        {
+            reverse = -1;
+        }
+
+        Vector2Int[] AttackDir = new Vector2Int[]
+        {
+            new Vector2Int(-1, +1 * reverse),
+            new Vector2Int(+1, +1 * reverse),
+        };
+
         // Passive move checks
-        Vector2Int newPos = base.currentSquare + new Vector2Int(0, +1);
+        Vector2Int newPos = base.currentSquare + new Vector2Int(0, +1 * reverse);
 
         if (board.IsInsideBoard(newPos) == true && board.IsSquareFree(newPos) == null)
         {
             board.Highlight(newPos);
 
-            newPos = base.currentSquare + new Vector2Int(0, +2);
+            newPos = base.currentSquare + new Vector2Int(0, +2 * reverse);
             if (board.IsInsideBoard(newPos) == true && FirstMove == true && board.IsSquareFree(newPos) == null)
             {
                 board.Highlight(newPos);
