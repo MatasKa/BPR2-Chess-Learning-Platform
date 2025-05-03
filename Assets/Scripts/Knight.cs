@@ -27,7 +27,6 @@ public class Knight : Piece
                 temp = board.IsSquareFree(newPos);
                 if (temp == null)
                 {
-                    Debug.Log("Knight newPos:" + newPos.x + " " + newPos.y);
                     board.Highlight(newPos);
                 }
                 else if (board.IsEnemyPiece(temp) == true)
