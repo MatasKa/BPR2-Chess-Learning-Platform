@@ -4,6 +4,8 @@ using UnityEngine.InputSystem.iOS;
 public class Pawn : Piece
 {
 
+    //Don't forget to check En Passant!!!
+
     private bool FirstMove = true;
 
     public override void PossibleMoves()
@@ -25,12 +27,12 @@ public class Pawn : Piece
         // Passive move checks
         Vector2Int newPos = base.currentSquare + new Vector2Int(0, +1 * reverse);
 
-        if (board.IsInsideBoard(newPos) == true && board.IsSquareFree(newPos) == null)
+        if (board.IsInsideBoard(newPos) == true && board.GetPieceOnSquare(newPos) == null)
         {
             board.Highlight(newPos);
 
             newPos = base.currentSquare + new Vector2Int(0, +2 * reverse);
-            if (board.IsInsideBoard(newPos) == true && FirstMove == true && board.IsSquareFree(newPos) == null)
+            if (board.IsInsideBoard(newPos) == true && FirstMove == true && board.GetPieceOnSquare(newPos) == null)
             {
                 board.Highlight(newPos);
             }
@@ -42,7 +44,7 @@ public class Pawn : Piece
             newPos = base.currentSquare + AttackDir[i];
             if (board.IsInsideBoard(newPos))
             {
-                Piece temp = board.IsSquareFree(newPos);
+                Piece temp = board.GetPieceOnSquare(newPos);
                 if (temp != null && board.IsEnemyPiece(temp) == true)
                     board.Highlight(newPos);
             }

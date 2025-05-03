@@ -30,7 +30,7 @@ public class Board : MonoBehaviour
         squares[square.x, square.y].GetComponent<SpriteRenderer>().enabled = true;
     }
 
-    public Piece IsSquareFree(Vector2Int checkPos)
+    public Piece GetPieceOnSquare(Vector2Int checkPos)
     {
         foreach (Piece piece in pieces)
         {

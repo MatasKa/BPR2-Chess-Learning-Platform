@@ -24,7 +24,7 @@ public class Knight : Piece
             if (board.IsInsideBoard(newPos))
             {
                 Piece temp = null;
-                temp = board.IsSquareFree(newPos);
+                temp = board.GetPieceOnSquare(newPos);
                 if (temp == null)
                 {
                     board.Highlight(newPos);
