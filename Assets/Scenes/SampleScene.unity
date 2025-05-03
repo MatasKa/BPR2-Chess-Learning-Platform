@@ -2905,11 +2905,11 @@ GameObject:
   - component: {fileID: 646446177}
   m_Layer: 0
   m_Name: White King
-  m_TagString: Untagged
+  m_TagString: White
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &646446174
 Transform:
   m_ObjectHideFlags: 0
@@ -3035,11 +3035,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 646446173}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4514a97d730baf440965e8844fccb4fe, type: 3}
+  m_Script: {fileID: 11500000, guid: 1f5a642eff015fa469c23aea2c54e7eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentSquare: {x: 0, y: 0}
-  white: 0
+  currentSquare: {x: 4, y: 0}
+  white: 1
 --- !u!1 &689053883
 GameObject:
   m_ObjectHideFlags: 0
