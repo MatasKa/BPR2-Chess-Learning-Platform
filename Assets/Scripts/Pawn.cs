@@ -45,7 +45,7 @@ public class Pawn : Piece
             if (board.IsInsideBoard(newPos))
             {
                 Piece temp = board.GetPieceOnSquare(newPos);
-                if (temp != null && board.IsEnemyPiece(temp) == true)
+                if (temp != null && board.IsEnemyPiece(this, temp) == true)
                     board.Highlight(newPos);
             }
         }

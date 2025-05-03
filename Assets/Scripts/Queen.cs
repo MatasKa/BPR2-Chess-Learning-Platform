@@ -8,31 +8,25 @@ public class Queen : Piece
         base.PossibleMoves();
 
         Vector2Int newPos = base.currentSquare;
-        Vector2Int dir = new Vector2Int(0, 0);
-        for (int i = 0; i < 4; i++)
+        Vector2Int move = new Vector2Int(0, 0);
+
+        Vector2Int[] directions = new Vector2Int[]
+    {
+        new Vector2Int(0, 1),
+        new Vector2Int(1, 0),
+        new Vector2Int(0, -1),
+        new Vector2Int(-1, 0),
+        new Vector2Int(1, 1),
+        new Vector2Int(1, -1),
+        new Vector2Int(-1, -1),
+        new Vector2Int(-1, 1)
+    };
+
+        for (int i = 0; i < 8; i++)
         {
             for (int o = 1; o <= 8; o++)
             {
-
-                //Feels like there could be a better way
-                if (i == 0)
-                {
-                    dir = new Vector2Int(o, o);
-                }
-                else if (i == 1)
-                {
-                    dir = new Vector2Int(o, -o);
-                }
-                else if (i == 2)
-                {
-                    dir = new Vector2Int(-o, -o);
-                }
-                else
-                {
-                    dir = new Vector2Int(-o, o);
-                }
-
-                newPos = base.currentSquare + dir;
+                newPos = base.currentSquare + directions[i] * o;
                 if (board.IsInsideBoard(newPos))
                 {
                     Piece temp = null;
@@ -41,7 +35,7 @@ public class Queen : Piece
                     {
                         board.Highlight(newPos);
                     }
-                    else if (board.IsEnemyPiece(temp) == true)
+                    else if (board.IsEnemyPiece(this, temp) == true)
                     {
                         board.Highlight(newPos);
                         break;

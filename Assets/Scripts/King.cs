@@ -31,7 +31,7 @@ public class King : Piece
                 {
                     board.Highlight(newPos);
                 }
-                else if (board.IsEnemyPiece(temp) == true)
+                else if (board.IsEnemyPiece(this, temp) == true)
                 {
                     board.Highlight(newPos);
                 }

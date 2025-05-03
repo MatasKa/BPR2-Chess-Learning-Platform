@@ -48,9 +48,9 @@ public class Board : MonoBehaviour
         return pos.x >= 0 && pos.x < 8 && pos.y >= 0 && pos.y < 8;
     }
 
-    public bool IsEnemyPiece(Piece piece)
+    public bool IsEnemyPiece(Piece current, Piece other)
     {
-        if (piece.gameObject.tag == lastTurnSide)
+        if (current.gameObject.tag != other.gameObject.tag)
         {
             return true;
         }
