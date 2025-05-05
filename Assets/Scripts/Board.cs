@@ -3,12 +3,16 @@ using System.Linq;
 using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
+//using UnityEngine.UIElements;
+using UnityEngine.UI;
+
 
 public class Board : MonoBehaviour
 {
     [SerializeField] private GameObject[] squareArray;
     private GameObject[,] squares = new GameObject[8, 8];
     private Piece[] pieces;
+    private Piece currentPiece;
     private String lastTurnSide = "Black";
     void Start()
     {
@@ -26,8 +30,9 @@ public class Board : MonoBehaviour
 
     public void Highlight(Vector2Int square)
     {
-        Debug.Log("Highlight square:" + square.x + " " + square.y);
+        //Debug.Log("Highlight square:" + square.x + " " + square.y);
         squares[square.x, square.y].GetComponent<SpriteRenderer>().enabled = true;
+        squares[square.x, square.y].GetComponent<Button>().interactable = true;
     }
 
     public Piece GetPieceOnSquare(Vector2Int checkPos)
@@ -65,7 +70,10 @@ public class Board : MonoBehaviour
         for (int i = 0; i < 8; i++)
         {
             for (int o = 0; o < 8; o++)
+            {
                 squares[i, o].GetComponent<SpriteRenderer>().enabled = false;
+                squares[i, o].GetComponent<Button>().interactable = false;
+            }
         }
     }
     private void InvertLastTurn()
@@ -78,5 +86,29 @@ public class Board : MonoBehaviour
         {
             lastTurnSide = "Black";
         }
+    }
+    public void SelectPiece(Piece sellectPiece)
+    {
+        foreach (Piece piece in pieces)
+        {
+            if (piece.IsSelected() == true)
+            {
+                piece.SetSelected(false);
+            }
+        }
+        currentPiece = sellectPiece;
+        currentPiece.SetSelected(true);
+        Debug.Log("selected " + currentPiece.name);
+    }
+
+    public void MovePiece(string square)
+    {
+        Debug.Log("square pressed:" + square);
+        int newPosX = int.Parse(square[0].ToString());
+        int newPosY = int.Parse(square[1].ToString());
+        Vector2Int newPos = new Vector2Int(newPosX, newPosY);
+        currentPiece.SetCurrentSquare(newPos);
+        currentPiece.gameObject.transform.position = new Vector3(newPosX, newPosY, currentPiece.transform.position.z);
+        ResetHighlights();
     }
 }

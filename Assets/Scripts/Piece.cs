@@ -15,14 +15,18 @@ public class Piece : MonoBehaviour
     }
     private void OnMouseDown()
     {
-        Debug.Log("tipo pasirinktas");
-        selected = true;
+        board.SelectPiece(this);
+        //selected = true;
         PossibleMoves();
     }
 
     public bool IsSelected()
     {
         return selected;
+    }
+    public void SetSelected(bool sel)
+    {
+        selected = sel;
     }
 
     public bool IsWhite()
