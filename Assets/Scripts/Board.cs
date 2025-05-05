@@ -13,7 +13,7 @@ public class Board : MonoBehaviour
     private GameObject[,] squares = new GameObject[8, 8];
     private Piece[] pieces;
     private Piece currentPiece;
-    private String lastTurnSide = "Black";
+    private bool whiteTurn = true;
     void Start()
     {
         for (int i = 0; i < 8; i++)
@@ -76,15 +76,37 @@ public class Board : MonoBehaviour
             }
         }
     }
-    private void InvertLastTurn()
+    private void ChangeTurn()
     {
-        if (lastTurnSide == "Black")
+        if (whiteTurn == true)
         {
-            lastTurnSide = "White";
+            foreach (Piece piece in pieces)
+            {
+                if (piece.IsWhite() == false)
+                {
+                    piece.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                }
+                else
+                {
+                    piece.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                }
+            }
+            whiteTurn = false;
         }
         else
         {
-            lastTurnSide = "Black";
+            foreach (Piece piece in pieces)
+            {
+                if (piece.IsWhite() == true)
+                {
+                    piece.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+                }
+                else
+                {
+                    piece.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                }
+            }
+            whiteTurn = true;
         }
     }
     public void SelectPiece(Piece sellectPiece)
@@ -110,5 +132,11 @@ public class Board : MonoBehaviour
         currentPiece.SetCurrentSquare(newPos);
         currentPiece.gameObject.transform.position = new Vector3(newPosX, newPosY, currentPiece.transform.position.z);
         ResetHighlights();
+        ChangeTurn();
+    }
+
+    private void CapturePiece(Piece capturedPiece)
+    {
+
     }
 }

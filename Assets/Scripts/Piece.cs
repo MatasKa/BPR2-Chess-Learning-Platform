@@ -31,7 +31,7 @@ public class Piece : MonoBehaviour
 
     public bool IsWhite()
     {
-        return selected;
+        return white;
     }
 
     public void SetCaptured(bool cap)
