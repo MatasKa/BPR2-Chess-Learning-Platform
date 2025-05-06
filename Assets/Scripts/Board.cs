@@ -3,7 +3,6 @@ using System.Linq;
 using NUnit.Framework;
 using Unity.VisualScripting;
 using UnityEngine;
-//using UnityEngine.UIElements;
 using UnityEngine.UI;
 
 
@@ -21,16 +20,13 @@ public class Board : MonoBehaviour
             for (int o = 0; o < 8; o++)
             {
                 squares[i, o] = squareArray[i * 8 + o];
-                Debug.Log("square [" + o + ", " + i + "] name is " + squares[i, o].gameObject.name);
             }
         }
         pieces = FindObjectsByType<Piece>(FindObjectsSortMode.None);
-        Debug.Log("pieces count:" + pieces.Length);
     }
 
     public void Highlight(Vector2Int square)
     {
-        //Debug.Log("Highlight square:" + square.x + " " + square.y);
         squares[square.x, square.y].GetComponent<SpriteRenderer>().enabled = true;
         squares[square.x, square.y].GetComponent<Button>().interactable = true;
     }
@@ -42,7 +38,6 @@ public class Board : MonoBehaviour
             if (piece.GetCurrentSquare() == checkPos && piece.IsCaptured() == false)
             {
                 return piece;
-                //return IsEnemyPiece(piece.gameObject);
             }
         }
         return null;
@@ -78,37 +73,15 @@ public class Board : MonoBehaviour
     }
     private void ChangeTurn()
     {
-        if (whiteTurn == true)
+        whiteTurn = !whiteTurn;
+
+        foreach (Piece piece in pieces)
         {
-            foreach (Piece piece in pieces)
-            {
-                if (piece.IsWhite() == false)
-                {
-                    piece.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                }
-                else
-                {
-                    piece.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                }
-            }
-            whiteTurn = false;
-        }
-        else
-        {
-            foreach (Piece piece in pieces)
-            {
-                if (piece.IsWhite() == true)
-                {
-                    piece.gameObject.GetComponent<BoxCollider2D>().enabled = true;
-                }
-                else
-                {
-                    piece.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-                }
-            }
-            whiteTurn = true;
+            bool shouldEnable = piece.IsWhite() == whiteTurn;
+            piece.gameObject.GetComponent<BoxCollider2D>().enabled = shouldEnable;
         }
     }
+
     public void SelectPiece(Piece sellectPiece)
     {
         foreach (Piece piece in pieces)
@@ -120,15 +93,22 @@ public class Board : MonoBehaviour
         }
         currentPiece = sellectPiece;
         currentPiece.SetSelected(true);
-        Debug.Log("selected " + currentPiece.name);
     }
 
     public void MovePiece(string square)
     {
-        Debug.Log("square pressed:" + square);
+        Piece maybeEnemyPiece = null;
         int newPosX = int.Parse(square[0].ToString());
         int newPosY = int.Parse(square[1].ToString());
         Vector2Int newPos = new Vector2Int(newPosX, newPosY);
+        maybeEnemyPiece = GetPieceOnSquare(newPos);
+        if (maybeEnemyPiece != null)
+        {
+            if (IsEnemyPiece(maybeEnemyPiece, currentPiece) == true)
+            {
+                CapturePiece(maybeEnemyPiece);
+            }
+        }
         currentPiece.SetCurrentSquare(newPos);
         currentPiece.gameObject.transform.position = new Vector3(newPosX, newPosY, currentPiece.transform.position.z);
         ResetHighlights();
@@ -137,6 +117,7 @@ public class Board : MonoBehaviour
 
     private void CapturePiece(Piece capturedPiece)
     {
-
+        capturedPiece.gameObject.SetActive(false);
+        capturedPiece.SetCaptured(true);
     }
 }

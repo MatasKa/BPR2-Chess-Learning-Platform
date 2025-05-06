@@ -16,7 +16,6 @@ public class Piece : MonoBehaviour
     private void OnMouseDown()
     {
         board.SelectPiece(this);
-        //selected = true;
         PossibleMoves();
     }
 
