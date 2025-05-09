@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
 
 public class Pawn : Piece
 {
@@ -8,9 +8,9 @@ public class Pawn : Piece
 
     private bool FirstMove = true;
 
-    public override void PossibleMoves()
+    public override List<Vector2Int> PossibleMoves()
     {
-        base.PossibleMoves();
+        List<Vector2Int> moves = new List<Vector2Int>();
 
         int reverse = 1;
         if (white == false)
@@ -18,27 +18,26 @@ public class Pawn : Piece
             reverse = -1;
         }
 
+        // Passive move checks
+        Vector2Int newPos = base.currentSquare + new Vector2Int(0, +1 * reverse);
+        if (board.IsInsideBoard(newPos) == true && board.GetPieceOnSquare(newPos) == null)
+        {
+            moves.Add(newPos);
+
+            newPos = base.currentSquare + new Vector2Int(0, +2 * reverse);
+            if (board.IsInsideBoard(newPos) == true && FirstMove == true && board.GetPieceOnSquare(newPos) == null)
+            {
+                moves.Add(newPos);
+            }
+        }
+
+        // Attacking move checks
         Vector2Int[] AttackDir = new Vector2Int[]
         {
             new Vector2Int(-1, +1 * reverse),
             new Vector2Int(+1, +1 * reverse),
         };
 
-        // Passive move checks
-        Vector2Int newPos = base.currentSquare + new Vector2Int(0, +1 * reverse);
-
-        if (board.IsInsideBoard(newPos) == true && board.GetPieceOnSquare(newPos) == null)
-        {
-            board.Highlight(newPos);
-
-            newPos = base.currentSquare + new Vector2Int(0, +2 * reverse);
-            if (board.IsInsideBoard(newPos) == true && FirstMove == true && board.GetPieceOnSquare(newPos) == null)
-            {
-                board.Highlight(newPos);
-            }
-        }
-
-        // Attacking move checks
         for (int i = 0; i <= 1; i++)
         {
             newPos = base.currentSquare + AttackDir[i];
@@ -46,8 +45,10 @@ public class Pawn : Piece
             {
                 Piece temp = board.GetPieceOnSquare(newPos);
                 if (temp != null && board.IsEnemyPiece(this, temp) == true)
-                    board.Highlight(newPos);
+                    moves.Add(newPos);
             }
         }
+
+        return moves;
     }
 }

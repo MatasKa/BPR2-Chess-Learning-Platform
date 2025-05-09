@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "BPR2-Chess-Learning-Platform.sln"
+    "dotnet.defaultSolution": "BPR2 - Chess Learning Platform.sln"
 }

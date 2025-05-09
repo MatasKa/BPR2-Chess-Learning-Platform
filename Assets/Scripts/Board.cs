@@ -1,34 +1,29 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class Board : MonoBehaviour
 {
-    [SerializeField] private GameObject[] squareArray;
-    private GameObject[,] squares = new GameObject[8, 8];
+    [SerializeField] private BoardRenderer boardRenderer;
+    private TurnManager turnManager = new TurnManager();
+
     private Piece[] pieces;
+    private Piece whiteKing;
+    private Piece blackKing;
     private Piece currentPiece;
-    private bool whiteTurn = true;
+
     void Start()
     {
-        for (int i = 0; i < 8; i++)
-        {
-            for (int o = 0; o < 8; o++)
-            {
-                squares[i, o] = squareArray[i * 8 + o];
-            }
-        }
         pieces = FindObjectsByType<Piece>(FindObjectsSortMode.None);
+        whiteKing = GameObject.Find("White King").GetComponent<Piece>();
+        blackKing = GameObject.Find("Black King").GetComponent<Piece>();
     }
 
     public void Highlight(Vector2Int square)
     {
-        squares[square.x, square.y].GetComponent<SpriteRenderer>().enabled = true;
-        squares[square.x, square.y].GetComponent<Button>().interactable = true;
+        boardRenderer.Highlight(square);
     }
 
     public Piece GetPieceOnSquare(Vector2Int checkPos)
@@ -50,43 +45,19 @@ public class Board : MonoBehaviour
 
     public bool IsEnemyPiece(Piece current, Piece other)
     {
-        if (current.gameObject.tag != other.gameObject.tag)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return current.IsWhite() != other.IsWhite();
     }
 
     public void ResetHighlights()
     {
-        for (int i = 0; i < 8; i++)
-        {
-            for (int o = 0; o < 8; o++)
-            {
-                squares[i, o].GetComponent<SpriteRenderer>().enabled = false;
-                squares[i, o].GetComponent<Button>().interactable = false;
-            }
-        }
-    }
-    private void ChangeTurn()
-    {
-        whiteTurn = !whiteTurn;
-
-        foreach (Piece piece in pieces)
-        {
-            bool shouldEnable = piece.IsWhite() == whiteTurn;
-            piece.gameObject.GetComponent<BoxCollider2D>().enabled = shouldEnable;
-        }
+        boardRenderer.ResetHighlights();
     }
 
     public void SelectPiece(Piece sellectPiece)
     {
         foreach (Piece piece in pieces)
         {
-            if (piece.IsSelected() == true)
+            if (piece.IsSelected())
             {
                 piece.SetSelected(false);
             }
@@ -97,27 +68,68 @@ public class Board : MonoBehaviour
 
     public void MovePiece(string square)
     {
-        Piece maybeEnemyPiece = null;
         int newPosX = int.Parse(square[0].ToString());
         int newPosY = int.Parse(square[1].ToString());
         Vector2Int newPos = new Vector2Int(newPosX, newPosY);
-        maybeEnemyPiece = GetPieceOnSquare(newPos);
-        if (maybeEnemyPiece != null)
+
+        Piece maybeEnemyPiece = GetPieceOnSquare(newPos);
+        if (maybeEnemyPiece != null && IsEnemyPiece(currentPiece, maybeEnemyPiece))
         {
-            if (IsEnemyPiece(maybeEnemyPiece, currentPiece) == true)
-            {
-                CapturePiece(maybeEnemyPiece);
-            }
+            maybeEnemyPiece.gameObject.SetActive(false);
+            maybeEnemyPiece.SetCaptured(true);
         }
+
         currentPiece.SetCurrentSquare(newPos);
-        currentPiece.gameObject.transform.position = new Vector3(newPosX, newPosY, currentPiece.transform.position.z);
+        currentPiece.transform.position = new Vector3(newPosX, newPosY, currentPiece.transform.position.z);
+
         ResetHighlights();
-        ChangeTurn();
+        turnManager.SwitchTurn(pieces);
+        IsKingInCheck(true);
     }
 
-    private void CapturePiece(Piece capturedPiece)
+    public bool IsKingInCheck(bool isWhite)
     {
-        capturedPiece.gameObject.SetActive(false);
-        capturedPiece.SetCaptured(true);
+        Piece king = isWhite ? whiteKing : blackKing;
+        Vector2Int kingPos = king.GetCurrentSquare();
+
+        foreach (Piece piece in pieces)
+        {
+            if (!piece.IsCaptured() && piece.IsWhite() != isWhite)
+            {
+                var moves = piece.PossibleMoves();
+                if (moves.Contains(kingPos))
+                    return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void SimulateMove(Piece piece, Vector2Int newPos, Piece capturedPiece, out Action restoreAction)
+    {
+        Vector2Int oldPos = piece.GetCurrentSquare();
+        bool wasCaptured = false;
+
+        if (capturedPiece != null)
+        {
+            wasCaptured = capturedPiece.IsCaptured();
+            capturedPiece.SetCaptured(true);
+            capturedPiece.gameObject.SetActive(false);
+        }
+
+        piece.SetCurrentSquare(newPos);
+        piece.transform.position = new Vector3(newPos.x, newPos.y, piece.transform.position.z);
+
+        restoreAction = () =>
+        {
+            piece.SetCurrentSquare(oldPos);
+            piece.transform.position = new Vector3(oldPos.x, oldPos.y, piece.transform.position.z);
+
+            if (capturedPiece != null)
+            {
+                capturedPiece.SetCaptured(wasCaptured);
+                capturedPiece.gameObject.SetActive(true);
+            }
+        };
     }
 }

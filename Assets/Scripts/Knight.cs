@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class Knight : Piece
 {
-    public override void PossibleMoves()
+    public override List<Vector2Int> PossibleMoves()
     {
-        base.PossibleMoves();
-        Vector2Int[] moves = new Vector2Int[]
+        List<Vector2Int> moves = new List<Vector2Int>();
+        Vector2Int[] directions = new Vector2Int[]
         {
         new Vector2Int(+2, +1),
         new Vector2Int(+2, -1),
@@ -18,22 +18,19 @@ public class Knight : Piece
         new Vector2Int(-1, -2)
         };
 
-        foreach (Vector2Int move in moves)
+        foreach (Vector2Int dir in directions)
         {
-            Vector2Int newPos = base.currentSquare + move;
+            Vector2Int newPos = currentSquare + dir;
             if (board.IsInsideBoard(newPos))
             {
-                Piece temp = null;
-                temp = board.GetPieceOnSquare(newPos);
-                if (temp == null)
+                Piece temp = board.GetPieceOnSquare(newPos);
+                if (temp == null || board.IsEnemyPiece(this, temp))
                 {
-                    board.Highlight(newPos);
-                }
-                else if (board.IsEnemyPiece(this, temp) == true)
-                {
-                    board.Highlight(newPos);
+                    moves.Add(newPos);
                 }
             }
         }
+
+        return moves;
     }
 }

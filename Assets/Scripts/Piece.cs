@@ -1,4 +1,4 @@
-using System.Text.RegularExpressions;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
@@ -13,10 +13,14 @@ public class Piece : MonoBehaviour
     {
         board = FindAnyObjectByType<Board>();
     }
+
     private void OnMouseDown()
     {
-        board.SelectPiece(this);
-        PossibleMoves();
+        if (captured == false)
+        {
+            board.SelectPiece(this);
+            ShowLegalMoves();
+        }
     }
 
     public bool IsSelected()
@@ -27,12 +31,10 @@ public class Piece : MonoBehaviour
     {
         selected = sel;
     }
-
     public bool IsWhite()
     {
         return white;
     }
-
     public void SetCaptured(bool cap)
     {
         captured = cap;
@@ -41,17 +43,45 @@ public class Piece : MonoBehaviour
     {
         return captured;
     }
-    public virtual void PossibleMoves()
+    public Vector2Int GetCurrentSquare()
     {
-        board.ResetHighlights();
+        return currentSquare;
     }
-
     public void SetCurrentSquare(Vector2Int square)
     {
         currentSquare = square;
     }
-    public Vector2Int GetCurrentSquare()
+
+    public virtual List<Vector2Int> PossibleMoves()
     {
-        return currentSquare;
+        return new List<Vector2Int>();
+    }
+
+    public void ShowLegalMoves()
+    {
+        board.ResetHighlights();
+
+        List<Vector2Int> allMoves = PossibleMoves();
+        foreach (var move in allMoves)
+        {
+            if (IsMoveLegal(move))
+            {
+                board.Highlight(move);
+            }
+        }
+    }
+
+    public bool IsMoveLegal(Vector2Int targetPos)
+    {
+        Piece capturedPiece = board.GetPieceOnSquare(targetPos);
+        Vector2Int originalPos = currentSquare;
+
+        board.SimulateMove(this, targetPos, capturedPiece, out var restoreAction);
+        // out var restoreAction() - get this by calling SimulateMove (logic is in there too) 
+
+        bool inCheck = board.IsKingInCheck(white);
+        restoreAction();
+
+        return !inCheck;
     }
 }
