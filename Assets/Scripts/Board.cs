@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class Board : MonoBehaviour
 {
     [SerializeField] private BoardRenderer boardRenderer;
-    private TurnManager turnManager = new TurnManager();
+    [SerializeField] private TurnManager turnManager;
 
     private Piece[] pieces;
     private Piece whiteKing;
@@ -15,9 +15,9 @@ public class Board : MonoBehaviour
     private Piece currentPiece;
 
     //next are for simulating moves
-    private Vector2Int prevPosition;
-    private bool prevCaptureState;
-    private Piece simulatedCapturedPiece;
+    private Vector2Int prevPos;
+    private bool prevCapState;
+    private Piece simCapPiece;
     void Start()
     {
         pieces = FindObjectsByType<Piece>(FindObjectsSortMode.None);
@@ -88,7 +88,6 @@ public class Board : MonoBehaviour
 
         ResetHighlights();
         turnManager.SwitchTurn(pieces, this);
-        IsKingInCheck(true);
     }
 
     public bool HasAnyLegalMoves(bool isWhite)
@@ -129,14 +128,14 @@ public class Board : MonoBehaviour
     public void DoSimulatedMove(Piece piece, Vector2Int newPos)
     {
 
-        prevPosition = piece.GetCurrentSquare();
-        simulatedCapturedPiece = GetPieceOnSquare(newPos);
+        prevPos = piece.GetCurrentSquare();
+        simCapPiece = GetPieceOnSquare(newPos);
 
-        if (simulatedCapturedPiece != null)
+        if (simCapPiece != null)
         {
-            prevCaptureState = simulatedCapturedPiece.IsCaptured();
-            simulatedCapturedPiece.SetCaptured(true);
-            simulatedCapturedPiece.gameObject.SetActive(false);
+            prevCapState = simCapPiece.IsCaptured();
+            simCapPiece.SetCaptured(true);
+            simCapPiece.gameObject.SetActive(false);
         }
 
         piece.SetCurrentSquare(newPos);
@@ -145,15 +144,15 @@ public class Board : MonoBehaviour
 
     public void UndoSimulatedMove(Piece piece)
     {
-        piece.SetCurrentSquare(prevPosition);
-        piece.transform.position = new Vector3(prevPosition.x, prevPosition.y, piece.transform.position.z);
+        piece.SetCurrentSquare(prevPos);
+        piece.transform.position = new Vector3(prevPos.x, prevPos.y, piece.transform.position.z);
 
-        if (simulatedCapturedPiece != null)
+        if (simCapPiece != null)
         {
-            simulatedCapturedPiece.SetCaptured(prevCaptureState);
-            simulatedCapturedPiece.gameObject.SetActive(true);
+            simCapPiece.SetCaptured(prevCapState);
+            simCapPiece.gameObject.SetActive(true);
         }
 
-        simulatedCapturedPiece = null;
+        simCapPiece = null;
     }
 }

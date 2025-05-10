@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public class TurnManager
+public class TurnManager : MonoBehaviour
 {
+    [SerializeField] private UIManager uiManager;
     private bool whiteTurn = true;
 
     public bool GetWhiteTurn()
@@ -29,17 +30,18 @@ public class TurnManager
 
     private void CheckForEndGame(Board board)
     {
-        bool currentIsWhite = whiteTurn;
-
-        if (board.HasAnyLegalMoves(currentIsWhite) == false)
+        if (board.HasAnyLegalMoves(whiteTurn) == false)
         {
-            if (board.IsKingInCheck(currentIsWhite) == true)
+            if (board.IsKingInCheck(whiteTurn) == true)
             {
-                Debug.Log("Checkmate! " + (currentIsWhite ? "Black" : "White") + " wins.");
+                int win = whiteTurn ? 2 : 1;
+                uiManager.GameEndUI(win);
+                //Debug.Log("sending 1 to UI manager");
             }
             else
             {
-                Debug.Log("Stalemate! It's a draw.");
+                uiManager.GameEndUI(3);
+                //Debug.Log("sending 3 to UI manager");
             }
         }
     }
