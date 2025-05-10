@@ -14,6 +14,10 @@ public class Board : MonoBehaviour
     private Piece blackKing;
     private Piece currentPiece;
 
+    //next are for simulating moves
+    private Vector2Int prevPosition;
+    private bool prevCaptureState;
+    private Piece simulatedCapturedPiece;
     void Start()
     {
         pieces = FindObjectsByType<Piece>(FindObjectsSortMode.None);
@@ -83,8 +87,25 @@ public class Board : MonoBehaviour
         currentPiece.transform.position = new Vector3(newPosX, newPosY, currentPiece.transform.position.z);
 
         ResetHighlights();
-        turnManager.SwitchTurn(pieces);
+        turnManager.SwitchTurn(pieces, this);
         IsKingInCheck(true);
+    }
+
+    public bool HasAnyLegalMoves(bool isWhite)
+    {
+        foreach (Piece piece in pieces)
+        {
+            if (!piece.IsCaptured() && piece.IsWhite() == isWhite)
+            {
+                var moves = piece.PossibleMoves();
+                foreach (var move in moves)
+                {
+                    if (piece.IsMoveLegal(move))
+                        return true;
+                }
+            }
+        }
+        return false;
     }
 
     public bool IsKingInCheck(bool isWhite)
@@ -105,31 +126,34 @@ public class Board : MonoBehaviour
         return false;
     }
 
-    public void SimulateMove(Piece piece, Vector2Int newPos, Piece capturedPiece, out Action restoreAction)
+    public void DoSimulatedMove(Piece piece, Vector2Int newPos)
     {
-        Vector2Int oldPos = piece.GetCurrentSquare();
-        bool wasCaptured = false;
 
-        if (capturedPiece != null)
+        prevPosition = piece.GetCurrentSquare();
+        simulatedCapturedPiece = GetPieceOnSquare(newPos);
+
+        if (simulatedCapturedPiece != null)
         {
-            wasCaptured = capturedPiece.IsCaptured();
-            capturedPiece.SetCaptured(true);
-            capturedPiece.gameObject.SetActive(false);
+            prevCaptureState = simulatedCapturedPiece.IsCaptured();
+            simulatedCapturedPiece.SetCaptured(true);
+            simulatedCapturedPiece.gameObject.SetActive(false);
         }
 
         piece.SetCurrentSquare(newPos);
         piece.transform.position = new Vector3(newPos.x, newPos.y, piece.transform.position.z);
+    }
 
-        restoreAction = () =>
+    public void UndoSimulatedMove(Piece piece)
+    {
+        piece.SetCurrentSquare(prevPosition);
+        piece.transform.position = new Vector3(prevPosition.x, prevPosition.y, piece.transform.position.z);
+
+        if (simulatedCapturedPiece != null)
         {
-            piece.SetCurrentSquare(oldPos);
-            piece.transform.position = new Vector3(oldPos.x, oldPos.y, piece.transform.position.z);
+            simulatedCapturedPiece.SetCaptured(prevCaptureState);
+            simulatedCapturedPiece.gameObject.SetActive(true);
+        }
 
-            if (capturedPiece != null)
-            {
-                capturedPiece.SetCaptured(wasCaptured);
-                capturedPiece.gameObject.SetActive(true);
-            }
-        };
+        simulatedCapturedPiece = null;
     }
 }
