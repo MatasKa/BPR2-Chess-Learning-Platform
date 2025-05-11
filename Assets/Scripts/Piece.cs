@@ -73,9 +73,6 @@ public class Piece : MonoBehaviour
 
     public bool IsMoveLegal(Vector2Int targetPos)
     {
-        //Piece capturedPiece = board.GetPieceOnSquare(targetPos);
-
-
         board.DoSimulatedMove(this, targetPos);
         bool inCheck = board.IsKingInCheck(white);
         board.UndoSimulatedMove(this);

@@ -6,7 +6,7 @@ public class Pawn : Piece
 
     //Don't forget to check En Passant!!!
 
-    private bool FirstMove = true;
+    //private bool firstMove = true;
 
     public override List<Vector2Int> PossibleMoves()
     {
@@ -25,8 +25,10 @@ public class Pawn : Piece
             moves.Add(newPos);
 
             newPos = base.currentSquare + new Vector2Int(0, +2 * reverse);
-            if (board.IsInsideBoard(newPos) == true && FirstMove == true && board.GetPieceOnSquare(newPos) == null)
+            int yStartPos = (reverse == 1) ? 1 : 6;
+            if (board.GetPieceOnSquare(newPos) == null && currentSquare.y == yStartPos)
             {
+                //Debug.Log("piece name: " + gameObject.name + ". Is the piece is white? " + white + ". what is its reverse? " + reverse + " . its Y start position is set as " + yStartPos);
                 moves.Add(newPos);
             }
         }
