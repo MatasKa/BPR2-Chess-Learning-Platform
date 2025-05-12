@@ -14,10 +14,15 @@ public class Board : MonoBehaviour
     private Piece blackKing;
     private Piece currentPiece;
 
-    //next are for simulating moves
+
+    //for simulating moves
     private Vector2Int prevPos;
     private bool prevCapState;
     private Piece simCapPiece;
+
+    private Piece enPassantTargetPawn = null;
+    private Vector2Int enPassantSquare;
+
     void Start()
     {
         pieces = FindObjectsByType<Piece>(FindObjectsSortMode.None);
@@ -52,6 +57,34 @@ public class Board : MonoBehaviour
         return current.IsWhite() != other.IsWhite();
     }
 
+    public void PrepEnPassantTarget(Piece pawn, Vector2Int newPos) // could be private
+    {
+        if (pawn != null)
+        {
+            int dir = (pawn.IsWhite() == true) ? -1 : 1;
+            enPassantSquare = new Vector2Int(newPos.x, newPos.y + dir);
+        }
+        enPassantTargetPawn = pawn;
+        //Debug.Log("en passant Target set: " + enPassantTargetPawn.name);
+        //Debug.Log("en passant Square set: " + enPassantSquare);
+    }
+
+    public Piece GetEnPassantTarget()
+    {
+        return enPassantTargetPawn;
+    }
+
+    public void CheckEnPassant(Vector2Int newPos, Piece piece)
+    {
+        if (newPos == enPassantSquare && piece is Pawn)
+        {
+            CapturePiece(enPassantTargetPawn);
+        }
+        PrepEnPassantTarget(null, new Vector2Int(-1, -1));
+        enPassantSquare = new Vector2Int(-1, -1);
+    }
+
+
     public void ResetHighlights()
     {
         boardRenderer.ResetHighlights();
@@ -70,17 +103,26 @@ public class Board : MonoBehaviour
         currentPiece.SetSelected(true);
     }
 
-    public void MovePiece(string square)
+    public void MovePiece(string square) //MOOOOOOOOOOVEEEEEEEEEEE
     {
         int newPosX = int.Parse(square[0].ToString());
         int newPosY = int.Parse(square[1].ToString());
         Vector2Int newPos = new Vector2Int(newPosX, newPosY);
 
+
+
         Piece maybeEnemyPiece = GetPieceOnSquare(newPos);
         if (maybeEnemyPiece != null && IsEnemyPiece(currentPiece, maybeEnemyPiece))
         {
-            maybeEnemyPiece.gameObject.SetActive(false);
-            maybeEnemyPiece.SetCaptured(true);
+            CapturePiece(maybeEnemyPiece);
+        }
+
+
+
+        CheckEnPassant(newPos, currentPiece);
+        if ((newPos.y - currentPiece.GetCurrentSquare().y == 2 || newPos.y - currentPiece.GetCurrentSquare().y == -2) && currentPiece is Pawn)
+        {
+            PrepEnPassantTarget(currentPiece, newPos);
         }
 
         currentPiece.SetCurrentSquare(newPos);
@@ -88,6 +130,12 @@ public class Board : MonoBehaviour
 
         ResetHighlights();
         turnManager.SwitchTurn(pieces, this);
+    }
+
+    public void CapturePiece(Piece piece)
+    {
+        piece.SetCaptured(true);
+        piece.gameObject.SetActive(false);
     }
 
     public bool HasAnyLegalMoves(bool isWhite)

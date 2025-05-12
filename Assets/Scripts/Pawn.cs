@@ -4,9 +4,8 @@ using UnityEngine;
 public class Pawn : Piece
 {
 
-    //Don't forget to check En Passant!!!
-
-    //private bool firstMove = true;
+    //enPassantTarget - can be taken by en passant
+    private bool enPassantTarget = false;
 
     public override List<Vector2Int> PossibleMoves()
     {
@@ -51,6 +50,16 @@ public class Pawn : Piece
             }
         }
 
+        Piece enPassantPawn = board.GetEnPassantTarget();
+
+        if (enPassantPawn != null && enPassantPawn.GetCurrentSquare().y == currentSquare.y)
+        {
+            if (enPassantPawn.GetCurrentSquare().x - currentSquare.x == 1 || enPassantPawn.GetCurrentSquare().x - currentSquare.x == -1)
+            {
+                Vector2Int EnPassantPos = new Vector2Int(enPassantPawn.GetCurrentSquare().x, currentSquare.y + (IsWhite() ? 1 : -1));
+                moves.Add(EnPassantPos);
+            }
+        }
         return moves;
     }
 }
