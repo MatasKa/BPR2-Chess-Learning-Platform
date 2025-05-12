@@ -9,7 +9,7 @@ public class Piece : MonoBehaviour
     protected bool captured = false;
     [SerializeField] protected bool white = false;
 
-    void Start()
+    void Awake()
     {
         board = FindAnyObjectByType<Board>();
     }
@@ -35,6 +35,12 @@ public class Piece : MonoBehaviour
     {
         return white;
     }
+
+    public void SetWhite(bool w)
+    {
+        white = w;
+    }
+
     public void SetCaptured(bool cap)
     {
         captured = cap;

@@ -28,6 +28,15 @@ public class TurnManager : MonoBehaviour
         CheckForEndGame(board);
     }
 
+    //Disables all colliders, so that pieces can't be selected (used for pawn promotion)
+    public void StopAllPieces(Piece[] pieces)
+    {
+        foreach (Piece piece in pieces)
+        {
+            piece.GetComponent<BoxCollider2D>().enabled = false;
+        }
+    }
+
     private void CheckForEndGame(Board board)
     {
         if (board.HasAnyLegalMoves(whiteTurn) == false)
@@ -35,12 +44,12 @@ public class TurnManager : MonoBehaviour
             if (board.IsKingInCheck(whiteTurn) == true)
             {
                 int win = whiteTurn ? 2 : 1;
-                uiManager.GameEndUI(win);
+                uiManager.ShowGameEndUI(win);
                 //Debug.Log("sending 1 to UI manager");
             }
             else
             {
-                uiManager.GameEndUI(3);
+                uiManager.ShowGameEndUI(3);
                 //Debug.Log("sending 3 to UI manager");
             }
         }

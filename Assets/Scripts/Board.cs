@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class Board : MonoBehaviour
 {
     [SerializeField] private BoardRenderer boardRenderer;
     [SerializeField] private TurnManager turnManager;
+    [SerializeField] private UIManager uiManager;
 
     private Piece[] pieces;
     private Piece whiteKing;
@@ -109,27 +111,80 @@ public class Board : MonoBehaviour
         int newPosY = int.Parse(square[1].ToString());
         Vector2Int newPos = new Vector2Int(newPosX, newPosY);
 
-
-
+        //capture piece if there is one
         Piece maybeEnemyPiece = GetPieceOnSquare(newPos);
         if (maybeEnemyPiece != null && IsEnemyPiece(currentPiece, maybeEnemyPiece))
         {
             CapturePiece(maybeEnemyPiece);
         }
 
-
-
+        //En Passant checks
         CheckEnPassant(newPos, currentPiece);
         if ((newPos.y - currentPiece.GetCurrentSquare().y == 2 || newPos.y - currentPiece.GetCurrentSquare().y == -2) && currentPiece is Pawn)
         {
             PrepEnPassantTarget(currentPiece, newPos);
         }
 
+        //moving the piece
         currentPiece.SetCurrentSquare(newPos);
         currentPiece.transform.position = new Vector3(newPosX, newPosY, currentPiece.transform.position.z);
 
         ResetHighlights();
+
+        //Check for Pawn promotion
+        if (currentPiece is Pawn && (currentPiece.GetCurrentSquare().y == 0 || currentPiece.GetCurrentSquare().y == 7))
+        {
+            Debug.Log(currentPiece.GetCurrentSquare());
+            uiManager.ShowPawnPromotionUI(currentPiece.GetCurrentSquare(), currentPiece.IsWhite());
+            turnManager.StopAllPieces(pieces);
+            return;
+        }
+
         turnManager.SwitchTurn(pieces, this);
+    }
+
+    public void PromotePawn(int promotion)
+    {
+        StartCoroutine(ReplacePieceType(promotion));
+        uiManager.ChangePieceSprite(currentPiece, promotion, currentPiece.IsWhite());
+        turnManager.SwitchTurn(pieces, this);
+    }
+
+    IEnumerator ReplacePieceType(int promotion)
+    {
+        //promotions: 0 - Queen, 1 - Rook, 2 - Bishop, 3 - Knight
+        int index = System.Array.IndexOf(pieces, currentPiece);
+        Vector2Int pos = currentPiece.GetCurrentSquare();
+        bool white = currentPiece.IsWhite();
+        Destroy(currentPiece.gameObject.GetComponent<Pawn>());
+        if (promotion == 0)
+        {
+            currentPiece.gameObject.AddComponent<Queen>();
+            pieces[index] = currentPiece.GetComponent<Queen>();
+        }
+        else if (promotion == 1)
+        {
+            currentPiece.gameObject.AddComponent<Rook>();
+            pieces[index] = currentPiece.GetComponent<Rook>();
+
+        }
+        else if (promotion == 2)
+        {
+            currentPiece.gameObject.AddComponent<Bishop>();
+            pieces[index] = currentPiece.GetComponent<Bishop>();
+
+        }
+        else
+        {
+            currentPiece.gameObject.AddComponent<Knight>();
+            pieces[index] = currentPiece.GetComponent<Knight>();
+
+        }
+
+        pieces[index].SetWhite(white);
+        pieces[index].SetCurrentSquare(pos);
+
+        yield return null;
     }
 
     public void CapturePiece(Piece piece)
