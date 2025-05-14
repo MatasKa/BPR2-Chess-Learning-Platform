@@ -12,8 +12,8 @@ public class Board : MonoBehaviour
     [SerializeField] private UIManager uiManager;
 
     private Piece[] pieces;
-    private Piece whiteKing;
-    private Piece blackKing;
+    private King whiteKing;
+    private King blackKing;
     private Piece currentPiece;
 
 
@@ -28,8 +28,8 @@ public class Board : MonoBehaviour
     void Start()
     {
         pieces = FindObjectsByType<Piece>(FindObjectsSortMode.None);
-        whiteKing = GameObject.Find("White King").GetComponent<Piece>();
-        blackKing = GameObject.Find("Black King").GetComponent<Piece>();
+        whiteKing = GameObject.Find("White King").GetComponent<King>();
+        blackKing = GameObject.Find("Black King").GetComponent<King>();
     }
 
     public void Highlight(Vector2Int square)
@@ -82,7 +82,7 @@ public class Board : MonoBehaviour
         {
             CapturePiece(enPassantTargetPawn);
         }
-        PrepEnPassantTarget(null, new Vector2Int(-1, -1));
+        PrepEnPassantTarget(null, new Vector2Int(-1, -1)); //cant call pawn.IsWhite if pawn is null
         enPassantSquare = new Vector2Int(-1, -1);
     }
 
@@ -140,6 +140,36 @@ public class Board : MonoBehaviour
             return;
         }
 
+        //Castling
+
+        if (currentPiece is King king)
+        {
+            if (king.GetHasMoved() == false)
+            {
+                int Ypos = (king.IsWhite() == true) ? 0 : 7;
+                new Vector2Int(6, Ypos);
+
+                //kingside
+                if (newPos == new Vector2Int(6, Ypos))
+                {
+                    GetPieceOnSquare(new Vector2Int(7, Ypos)).transform.position = new Vector3(5, Ypos, GetPieceOnSquare(new Vector2Int(7, Ypos)).transform.position.z);
+                    GetPieceOnSquare(new Vector2Int(7, Ypos)).SetCurrentSquare(new Vector2Int(5, Ypos));
+                }
+
+                //queenside
+                if (newPos == new Vector2Int(1, Ypos))
+                {
+                    GetPieceOnSquare(new Vector2Int(0, Ypos)).transform.position = new Vector3(2, Ypos, GetPieceOnSquare(new Vector2Int(0, Ypos)).transform.position.z);
+                    GetPieceOnSquare(new Vector2Int(0, Ypos)).SetCurrentSquare(new Vector2Int(0, Ypos));
+                }
+                king.SetHasMoved(true);
+            }
+        }
+        if (currentPiece is Rook rook)
+        {
+            rook.SetHasMoved(true);
+        }
+
         turnManager.SwitchTurn(pieces, this);
     }
 
@@ -193,6 +223,70 @@ public class Board : MonoBehaviour
         piece.gameObject.SetActive(false);
     }
 
+    public bool HasRookMoved(Piece piece)
+    {
+        if (piece is Rook rook)
+        {
+            return rook.GetHasMoved();
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    //checks if king does not pass (and enter) a check when castling (Kingside)
+    public bool PassesCheckWhenKingsideCastle(bool isWhite)
+    {
+        int Ypos = (isWhite == true) ? 0 : 7;
+        foreach (Piece piece in pieces)
+        {
+            if (!piece.IsCaptured() && piece.IsWhite() != isWhite)
+            {
+                List<Vector2Int> moves;
+                if (piece is King king)
+                {
+                    moves = king.StandartMoves();
+                }
+                else
+                {
+                    moves = piece.PossibleMoves();
+                }
+                if (moves.Contains(new Vector2Int(4, Ypos))
+                || moves.Contains(new Vector2Int(5, Ypos))
+                || moves.Contains(new Vector2Int(6, Ypos)))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public bool PassesCheckWhenQueensideCastle(bool isWhite)
+    {
+        int Ypos = (isWhite == true) ? 0 : 7;
+        foreach (Piece piece in pieces)
+        {
+            if (!piece.IsCaptured() && piece.IsWhite() != isWhite)
+            {
+                List<Vector2Int> moves;
+                if (piece is King king)
+                {
+                    moves = king.StandartMoves();
+                }
+                else
+                {
+                    moves = piece.PossibleMoves();
+                }
+                if (moves.Contains(new Vector2Int(1, Ypos))
+                || moves.Contains(new Vector2Int(2, Ypos))
+                || moves.Contains(new Vector2Int(3, Ypos))
+                || moves.Contains(new Vector2Int(4, Ypos)))
+                    return true;
+            }
+        }
+        return false;
+    }
+
     public bool HasAnyLegalMoves(bool isWhite)
     {
         foreach (Piece piece in pieces)
@@ -214,7 +308,7 @@ public class Board : MonoBehaviour
     {
         Piece king = isWhite ? whiteKing : blackKing;
         Vector2Int kingPos = king.GetCurrentSquare();
-
+        Debug.Log(king.gameObject.name + " IsKingInCheck");
         foreach (Piece piece in pieces)
         {
             if (!piece.IsCaptured() && piece.IsWhite() != isWhite)
@@ -230,7 +324,6 @@ public class Board : MonoBehaviour
 
     public void DoSimulatedMove(Piece piece, Vector2Int newPos)
     {
-
         prevPos = piece.GetCurrentSquare();
         simCapPiece = GetPieceOnSquare(newPos);
 
@@ -242,13 +335,14 @@ public class Board : MonoBehaviour
         }
 
         piece.SetCurrentSquare(newPos);
-        piece.transform.position = new Vector3(newPos.x, newPos.y, piece.transform.position.z);
+        //piece.transform.position = new Vector3(newPos.x, newPos.y, piece.transform.position.z);
     }
 
     public void UndoSimulatedMove(Piece piece)
     {
+
         piece.SetCurrentSquare(prevPos);
-        piece.transform.position = new Vector3(prevPos.x, prevPos.y, piece.transform.position.z);
+        //piece.transform.position = new Vector3(prevPos.x, prevPos.y, piece.transform.position.z);
 
         if (simCapPiece != null)
         {
