@@ -48,6 +48,10 @@ public class Board : MonoBehaviour
         }
         return null;
     }
+    public Piece[] GetPieces()
+    {
+        return pieces;
+    }
 
     public bool IsInsideBoard(Vector2Int pos)
     {

@@ -3,8 +3,14 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     [SerializeField] private UIManager uiManager;
+    [SerializeField] private bool playerSideWhite = true;
+    [SerializeField] private Timer timer;
     private bool whiteTurn = true;
 
+    void Start()
+    {
+        timer.OnTimeEnd += OutOfTime;
+    }
     public bool GetWhiteTurn()
     {
         return whiteTurn;
@@ -25,10 +31,18 @@ public class TurnManager : MonoBehaviour
             piece.GetComponent<BoxCollider2D>().enabled = shouldEnable;
         }
 
+        if (playerSideWhite == whiteTurn)
+        {
+            timer.StartTimer();
+        }
+        else
+        {
+            timer.StopTimer();
+        }
+
         CheckForEndGame(board);
     }
 
-    //Disables all colliders, so that pieces can't be selected (used for pawn promotion)
     public void StopAllPieces(Piece[] pieces)
     {
         foreach (Piece piece in pieces)
@@ -37,6 +51,11 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    private void OutOfTime()
+    {
+        uiManager.ShowGameEndUI(4);
+
+    }
     private void CheckForEndGame(Board board)
     {
         if (board.HasAnyLegalMoves(whiteTurn) == false)
@@ -45,13 +64,12 @@ public class TurnManager : MonoBehaviour
             {
                 int win = whiteTurn ? 2 : 1;
                 uiManager.ShowGameEndUI(win);
-                //Debug.Log("sending 1 to UI manager");
             }
             else
             {
                 uiManager.ShowGameEndUI(3);
-                //Debug.Log("sending 3 to UI manager");
             }
+            StopAllPieces(board.GetPieces());
         }
     }
 }

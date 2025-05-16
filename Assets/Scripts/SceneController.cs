@@ -9,4 +9,9 @@ public class SceneController : MonoBehaviour
         UnityEngine.SceneManagement.Scene currentScene = SceneManager.GetActiveScene();
         SceneManager.LoadScene(currentScene.name);
     }
+
+    public void ToMenuScene()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
 }
