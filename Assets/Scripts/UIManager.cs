@@ -12,11 +12,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] pawnPromotionPopUp;
     [SerializeField] private Sprite[] promotionPieces;
 
-    void Start()
-    {
-        UpdateTimerColor(Color.black);
-    }
-
     void Update()
     {
         if (timerUI != null && endScreen.activeSelf == false)
@@ -26,7 +21,6 @@ public class UIManager : MonoBehaviour
     }
     public void ShowGameEndUI(int ending)
     {
-        endScreen.SetActive(true);
         String endMessage;
         if (endScreen.activeSelf == false)
         {
@@ -47,6 +41,7 @@ public class UIManager : MonoBehaviour
                 endMessage = "You ran out of time!";
             }
             endText.text = endMessage;
+            endScreen.SetActive(true);
         }
     }
 

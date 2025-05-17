@@ -14,4 +14,14 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene("Main Menu");
     }
+
+    public void LoadDefaultGameWhite()
+    {
+        SceneManager.LoadScene("Default Game White");
+    }
+
+    public void LoadDefaultGameBlack()
+    {
+        SceneManager.LoadScene("Default Game Black");
+    }
 }

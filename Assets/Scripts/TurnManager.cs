@@ -54,7 +54,6 @@ public class TurnManager : MonoBehaviour
     private void OutOfTime()
     {
         uiManager.ShowGameEndUI(4);
-
     }
     private void CheckForEndGame(Board board)
     {

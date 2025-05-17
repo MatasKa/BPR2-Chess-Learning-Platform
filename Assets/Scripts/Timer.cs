@@ -15,7 +15,6 @@ public class Timer : MonoBehaviour
     {
         if (isPaused == false)
         {
-            Debug.Log("atpisu laiko");
             timeLeft -= Time.deltaTime;
             min = Mathf.FloorToInt(timeLeft / 60);
             sec = Mathf.FloorToInt(timeLeft % 60);
