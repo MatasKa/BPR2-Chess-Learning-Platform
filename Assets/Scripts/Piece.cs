@@ -4,16 +4,15 @@ using UnityEngine;
 public class Piece : MonoBehaviour
 {
     [SerializeField] protected Vector2Int currentSquare;
+    [SerializeField] protected bool white = false;
     protected Board board;
     protected bool selected = false;
     protected bool captured = false;
-    [SerializeField] protected bool white = false;
 
     void Awake()
     {
         board = FindAnyObjectByType<Board>();
     }
-
     private void OnMouseDown()
     {
         if (captured == false)
@@ -22,7 +21,6 @@ public class Piece : MonoBehaviour
             ShowLegalMoves();
         }
     }
-
     public bool IsSelected()
     {
         return selected;
@@ -35,19 +33,17 @@ public class Piece : MonoBehaviour
     {
         return white;
     }
-
     public void SetWhite(bool w)
     {
         white = w;
     }
-
-    public void SetCaptured(bool cap)
-    {
-        captured = cap;
-    }
     public bool IsCaptured()
     {
         return captured;
+    }
+    public void SetCaptured(bool cap)
+    {
+        captured = cap;
     }
     public Vector2Int GetCurrentSquare()
     {
@@ -57,12 +53,6 @@ public class Piece : MonoBehaviour
     {
         currentSquare = square;
     }
-
-    public virtual List<Vector2Int> PossibleMoves()
-    {
-        return new List<Vector2Int>();
-    }
-
     public void ShowLegalMoves()
     {
         board.ResetHighlights();
@@ -76,7 +66,6 @@ public class Piece : MonoBehaviour
             }
         }
     }
-
     public bool IsMoveLegal(Vector2Int targetPos)
     {
         board.DoSimulatedMove(this, targetPos);
@@ -85,4 +74,10 @@ public class Piece : MonoBehaviour
 
         return !inCheck;
     }
+    public virtual List<Vector2Int> PossibleMoves()
+    {
+        return new List<Vector2Int>();
+    }
+
+
 }

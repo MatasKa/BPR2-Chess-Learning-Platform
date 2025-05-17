@@ -96,7 +96,7 @@ public class Board : MonoBehaviour
         boardRenderer.ResetHighlights();
     }
 
-    public void SelectPiece(Piece sellectPiece)
+    public void SelectPiece(Piece selectPiece)
     {
         foreach (Piece piece in pieces)
         {
@@ -105,7 +105,7 @@ public class Board : MonoBehaviour
                 piece.SetSelected(false);
             }
         }
-        currentPiece = sellectPiece;
+        currentPiece = selectPiece;
         currentPiece.SetSelected(true);
     }
 
@@ -240,7 +240,7 @@ public class Board : MonoBehaviour
     }
 
     //checks if king does not pass (and enter) a check when castling (Kingside)
-    public bool PassesCheckWhenKingsideCastle(bool isWhite)
+    public bool PassesCheckKingsideCastle(bool isWhite)
     {
         int Ypos = (isWhite == true) ? 0 : 7;
         foreach (Piece piece in pieces)
@@ -265,7 +265,7 @@ public class Board : MonoBehaviour
         return false;
     }
 
-    public bool PassesCheckWhenQueensideCastle(bool isWhite)
+    public bool PassesCheckQueensideCastle(bool isWhite)
     {
         int Ypos = (isWhite == true) ? 0 : 7;
         foreach (Piece piece in pieces)

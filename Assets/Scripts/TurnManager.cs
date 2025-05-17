@@ -11,16 +11,6 @@ public class TurnManager : MonoBehaviour
     {
         timer.OnTimeEnd += OutOfTime;
     }
-    public bool GetWhiteTurn()
-    {
-        return whiteTurn;
-    }
-
-    public void SetWhiteTurn(bool value)
-    {
-        whiteTurn = value;
-    }
-
     public void SwitchTurn(Piece[] pieces, Board board)
     {
         whiteTurn = !whiteTurn;
@@ -71,4 +61,5 @@ public class TurnManager : MonoBehaviour
             StopAllPieces(board.GetPieces());
         }
     }
+
 }
