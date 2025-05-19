@@ -27,7 +27,6 @@ public class Pawn : Piece
             int yStartPos = (reverse == 1) ? 1 : 6;
             if (board.GetPieceOnSquare(newPos) == null && currentSquare.y == yStartPos)
             {
-                //Debug.Log("piece name: " + gameObject.name + ". Is the piece is white? " + white + ". what is its reverse? " + reverse + " . its Y start position is set as " + yStartPos);
                 moves.Add(newPos);
             }
         }
@@ -50,7 +49,7 @@ public class Pawn : Piece
             }
         }
 
-        Piece enPassantPawn = board.GetEnPassantTarget();
+        Piece enPassantPawn = board.specialMoveChecker.GetEnPassantTarget();
 
         if (enPassantPawn != null && enPassantPawn.GetCurrentSquare().y == currentSquare.y)
         {

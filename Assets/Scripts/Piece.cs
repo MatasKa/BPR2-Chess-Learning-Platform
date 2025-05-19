@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
@@ -9,7 +10,7 @@ public class Piece : MonoBehaviour
     protected bool selected = false;
     protected bool captured = false;
 
-    void Awake()
+    void Start()
     {
         board = FindAnyObjectByType<Board>();
     }
@@ -74,6 +75,37 @@ public class Piece : MonoBehaviour
 
         return !inCheck;
     }
+    public bool CanMoveToSquare(Vector2Int pos, Piece piece)
+    {
+        if (board == null)
+        {
+            board = FindAnyObjectByType<Board>();
+        }
+        //Debug.Log(piece.gameObject.name + " tikrins, type: " + piece);
+        //Debug.Log(pos + " Inside board " + board.IsInsideBoard(pos));
+        //Debug.Log(pos + " Get piece " + board.GetPieceOnSquare(pos));
+
+        if (board.IsInsideBoard(pos) && (board.GetPieceOnSquare(pos) == null))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public bool CanCapture(Piece piece, Vector2Int pos)
+    {
+        if (board.GetPieceOnSquare(pos) != null && board.IsEnemyPiece(piece, board.GetPieceOnSquare(pos)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public virtual List<Vector2Int> PossibleMoves()
     {
         return new List<Vector2Int>();

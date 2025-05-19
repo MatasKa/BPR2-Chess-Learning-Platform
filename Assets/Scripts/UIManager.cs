@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour
         pawnPromotionPopUp[W].SetActive(false);
     }
 
-    public void ChangePieceSprite(Piece piece, int sprite, bool white)
+    public void ChangePieceSprite(GameObject piece, int sprite, bool white)
     {
         int changeColor = (white == true) ? 0 : 4;
         SpriteRenderer spriteRenderer = piece.gameObject.GetComponent<SpriteRenderer>();

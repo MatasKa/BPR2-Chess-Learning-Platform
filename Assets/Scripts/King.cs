@@ -13,8 +13,8 @@ public class King : Piece
             //castling 0-0
             if (board.GetPieceOnSquare(currentSquare + new Vector2Int(1, 0)) == null
              && board.GetPieceOnSquare(currentSquare + new Vector2Int(2, 0)) == null
-             && board.HasRookMoved(board.GetPieceOnSquare(currentSquare + new Vector2Int(3, 0))) == false
-            && board.PassesCheckKingsideCastle(white) == false)
+             && board.specialMoveChecker.HasRookMoved(board.GetPieceOnSquare(currentSquare + new Vector2Int(3, 0))) == false
+            && board.specialMoveChecker.PassesCheckKingsideCastle(white) == false)
             {
                 moves.Add(new Vector2Int(6, currentSquare.y));
             }
@@ -22,8 +22,8 @@ public class King : Piece
             if (board.GetPieceOnSquare(currentSquare + new Vector2Int(-1, 0)) == null
              && board.GetPieceOnSquare(currentSquare + new Vector2Int(-2, 0)) == null
              && board.GetPieceOnSquare(currentSquare + new Vector2Int(-3, 0)) == null
-             && board.HasRookMoved(board.GetPieceOnSquare(currentSquare + new Vector2Int(-4, 0))) == false
-            && board.PassesCheckKingsideCastle(white) == false)
+             && board.specialMoveChecker.HasRookMoved(board.GetPieceOnSquare(currentSquare + new Vector2Int(-4, 0))) == false
+            && board.specialMoveChecker.PassesCheckQueensideCastle(white) == false)
             {
                 moves.Add(new Vector2Int(1, currentSquare.y));
             }
@@ -50,13 +50,9 @@ public class King : Piece
         {
             Vector2Int newPos = base.currentSquare + dir;
 
-            if (board.IsInsideBoard(newPos))
+            if (CanMoveToSquare(newPos, this) || CanCapture(this, newPos))
             {
-                Piece temp = board.GetPieceOnSquare(newPos);
-                if (temp == null || board.IsEnemyPiece(this, temp))
-                {
-                    moves.Add(newPos);
-                }
+                moves.Add(newPos);
             }
         }
         return moves;

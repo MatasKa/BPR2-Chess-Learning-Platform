@@ -121,7 +121,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Board, Assembly-CSharp
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
         m_MethodName: PromotePawn
         m_Mode: 3
         m_Arguments:
@@ -147,7 +147,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6475978518854816105
 RectTransform:
   m_ObjectHideFlags: 0
@@ -289,7 +289,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Board, Assembly-CSharp
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
         m_MethodName: PromotePawn
         m_Mode: 3
         m_Arguments:
@@ -500,7 +500,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Board, Assembly-CSharp
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
         m_MethodName: PromotePawn
         m_Mode: 3
         m_Arguments:
@@ -708,7 +708,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Board, Assembly-CSharp
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
         m_MethodName: PromotePawn
         m_Mode: 3
         m_Arguments:

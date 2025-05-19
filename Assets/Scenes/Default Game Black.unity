@@ -16290,6 +16290,7 @@ GameObject:
   - component: {fileID: 1797327831}
   - component: {fileID: 1797327832}
   - component: {fileID: 1797327833}
+  - component: {fileID: 1797327834}
   m_Layer: 0
   m_Name: Chess board
   m_TagString: Untagged
@@ -16327,8 +16328,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   boardRenderer: {fileID: 1413943239}
-  turnManager: {fileID: 1797327833}
-  uiManager: {fileID: 2006079353}
+  specialMoveChecker: {fileID: 1797327834}
 --- !u!114 &1797327833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16344,6 +16344,19 @@ MonoBehaviour:
   uiManager: {fileID: 2006079353}
   playerSideWhite: 0
   timer: {fileID: 7935635644747892186}
+--- !u!114 &1797327834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797327829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73bd3267e5c60a94f844452a9cccbaf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  board: {fileID: 1797327832}
 --- !u!1 &1797697198
 GameObject:
   m_ObjectHideFlags: 0
@@ -19437,26 +19450,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: PawnPromotionPopUpBlack
       objectReference: {fileID: 0}
-    - target: {fileID: 1589783022224222586, guid: 0bce11788e5385b46b6434af77039f61, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 1835151371509237354, guid: 0bce11788e5385b46b6434af77039f61, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1797327832}
+      objectReference: {fileID: 1797327834}
     - target: {fileID: 3632669497614990415, guid: 0bce11788e5385b46b6434af77039f61, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1797327832}
+      objectReference: {fileID: 1797327834}
     - target: {fileID: 4071368330383076531, guid: 0bce11788e5385b46b6434af77039f61, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1797327832}
+      objectReference: {fileID: 1797327834}
     - target: {fileID: 5994086321891951559, guid: 0bce11788e5385b46b6434af77039f61, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1797327832}
+      objectReference: {fileID: 1797327834}
     - target: {fileID: 6475978518854816105, guid: 0bce11788e5385b46b6434af77039f61, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -19685,7 +19694,7 @@ PrefabInstance:
     - target: {fileID: 1089684272451004880, guid: ebda36b75bd7b03418de2f1877816d7a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1797327832}
+      objectReference: {fileID: 1797327834}
     - target: {fileID: 1823547194242124579, guid: ebda36b75bd7b03418de2f1877816d7a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -19769,23 +19778,19 @@ PrefabInstance:
     - target: {fileID: 4392018734109225065, guid: ebda36b75bd7b03418de2f1877816d7a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1797327832}
+      objectReference: {fileID: 1797327834}
     - target: {fileID: 5618292631250500924, guid: ebda36b75bd7b03418de2f1877816d7a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1797327832}
+      objectReference: {fileID: 1797327834}
     - target: {fileID: 8983437731472844151, guid: ebda36b75bd7b03418de2f1877816d7a, type: 3}
       propertyPath: m_Name
       value: PawnPromotionPopUpWhite
       objectReference: {fileID: 0}
-    - target: {fileID: 8983437731472844151, guid: ebda36b75bd7b03418de2f1877816d7a, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9222786141760322752, guid: ebda36b75bd7b03418de2f1877816d7a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1797327832}
+      objectReference: {fileID: 1797327834}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
