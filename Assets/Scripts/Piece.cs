@@ -7,6 +7,7 @@ public class Piece : MonoBehaviour
     [SerializeField] protected Vector2Int currentSquare;
     [SerializeField] protected bool white = false;
     [SerializeField] protected Board board;
+    [SerializeField] protected SpecialMoveChecker specialMoveChecker;
     protected bool selected = false;
     protected bool captured = false;
 
@@ -74,9 +75,10 @@ public class Piece : MonoBehaviour
     }
     public bool CanMoveToSquare(Vector2Int pos)
     {
-        if (board == null)
+        if (board == null || specialMoveChecker == null)
         {
             board = FindAnyObjectByType<Board>();
+            specialMoveChecker = FindAnyObjectByType<SpecialMoveChecker>();
         }
 
         if (board.IsInsideBoard(pos) && (board.GetPieceOnSquare(pos) == null))

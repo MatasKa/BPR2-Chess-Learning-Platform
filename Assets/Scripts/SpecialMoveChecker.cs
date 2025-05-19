@@ -5,8 +5,37 @@ using UnityEngine;
 public class SpecialMoveChecker : MonoBehaviour
 {
     [SerializeField] private Board board;
+    [SerializeField] private GameObject[] promotionPrefabs;
     private Piece enPassantTargetPawn { get; set; }
     private Vector2Int enPassantSquare;
+
+
+
+    public void CheckSpecialMoves(string square)
+    {
+        int newPosX = int.Parse(square[0].ToString());
+        int newPosY = int.Parse(square[1].ToString());
+        Vector2Int newPos = new Vector2Int(newPosX, newPosY);
+        CheckEnPassant(newPos, board.GetCurrentPiece());
+        if ((newPos.y - board.GetCurrentPiece().GetCurrentSquare().y == 2 || newPos.y - board.GetCurrentPiece().GetCurrentSquare().y == -2) && board.GetCurrentPiece() is Pawn)
+        {
+            PrepEnPassantTarget(board.GetCurrentPiece(), newPos);
+        }
+    }
+
+
+
+    public void CheckEnPassant(Vector2Int newPos, Piece piece)
+    {
+        Debug.Log("en pas " + newPos + " square " + enPassantSquare + " piece " + piece);
+        if (newPos == enPassantSquare && piece is Pawn)
+        {
+            Debug.Log("en passantAAAAA");
+            board.CapturePiece(enPassantTargetPawn);
+        }
+        PrepEnPassantTarget(null, new Vector2Int(-1, -1)); //cant call pawn.IsWhite if pawn is null
+        enPassantSquare = new Vector2Int(-1, -1);
+    }
 
     public void PrepEnPassantTarget(Piece pawn, Vector2Int newPos) // could be private
     {
@@ -23,15 +52,6 @@ public class SpecialMoveChecker : MonoBehaviour
         return enPassantTargetPawn;
     }
 
-    public void CheckEnPassant(Vector2Int newPos, Piece piece)
-    {
-        if (newPos == enPassantSquare && piece is Pawn)
-        {
-            board.CapturePiece(enPassantTargetPawn);
-        }
-        PrepEnPassantTarget(null, new Vector2Int(-1, -1)); //cant call pawn.IsWhite if pawn is null
-        enPassantSquare = new Vector2Int(-1, -1);
-    }
 
     public void PromotePawn(int promotion)
     {
@@ -42,40 +62,25 @@ public class SpecialMoveChecker : MonoBehaviour
 
     IEnumerator ReplacePieceType(int promotion)
     {
-        //promotions: 0 - Queen, 1 - Rook, 2 - Bishop, 3 - Knight
         int index = System.Array.IndexOf(board.GetAllPieces(), board.GetCurrentPiece());
+
         Vector2Int pos = board.GetCurrentPiece().GetCurrentSquare();
-        bool white = board.GetCurrentPiece().IsWhite();
-        Destroy(board.GetCurrentPiece().gameObject.GetComponent<Pawn>());
-        if (promotion == 0)
-        {
-            board.GetCurrentPiece().gameObject.AddComponent<Queen>();
-            board.GetAllPieces()[index] = board.GetCurrentPiece().GetComponent<Queen>();
-        }
-        else if (promotion == 1)
-        {
-            board.GetCurrentPiece().gameObject.AddComponent<Rook>();
-            board.GetAllPieces()[index] = board.GetCurrentPiece().GetComponent<Rook>();
+        Quaternion savedRotation = board.GetCurrentPiece().transform.rotation;
+        bool isWhite = board.GetCurrentPiece().IsWhite();
 
-        }
-        else if (promotion == 2)
-        {
-            board.GetCurrentPiece().gameObject.AddComponent<Bishop>();
-            board.GetAllPieces()[index] = board.GetCurrentPiece().GetComponent<Bishop>();
-
-        }
-        else
-        {
-            board.GetCurrentPiece().gameObject.AddComponent<Knight>();
-            board.GetAllPieces()[index] = board.GetCurrentPiece().GetComponent<Knight>();
-
-        }
-
-        board.GetAllPieces()[index].SetWhite(white);
-        board.GetAllPieces()[index].SetCurrentSquare(pos);
-
+        Destroy(board.GetCurrentPiece().gameObject);
         yield return null;
+
+        int prefab = isWhite ? promotion : promotion + 4;
+        GameObject newPieceObj = Instantiate(promotionPrefabs[prefab], new Vector3(pos.x, pos.y, 0), savedRotation);
+
+        Piece newPiece = newPieceObj.GetComponent<Piece>();
+        newPiece.SetWhite(isWhite);
+        newPiece.SetCurrentSquare(pos);
+
+        board.GetAllPieces()[index] = newPiece;
     }
+
 
     public bool HasRookMoved(Piece piece)
     {

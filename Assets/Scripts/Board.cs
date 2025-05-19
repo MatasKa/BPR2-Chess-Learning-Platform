@@ -10,11 +10,11 @@ public class Board : MonoBehaviour
     [SerializeField] private BoardRenderer boardRenderer;
     public TurnManager turnManager { get; set; }
     public UIManager uiManager { get; set; }
-    public SpecialMoveChecker specialMoveChecker;
+    //public SpecialMoveChecker specialMoveChecker;
 
     private Piece[] pieces;
-    private King whiteKing;
-    private King blackKing;
+    private Piece whiteKing;
+    private Piece blackKing;
     private Piece currentPiece;
 
     //for simulating moves
@@ -27,8 +27,8 @@ public class Board : MonoBehaviour
         turnManager = gameObject.GetComponent<TurnManager>();
         uiManager = FindAnyObjectByType<UIManager>();
         pieces = FindObjectsByType<Piece>(FindObjectsSortMode.None);
-        whiteKing = GameObject.Find("White King").GetComponent<King>();
-        blackKing = GameObject.Find("Black King").GetComponent<King>();
+        whiteKing = GameObject.Find("White King").GetComponent<Piece>();
+        blackKing = GameObject.Find("Black King").GetComponent<Piece>();
     }
     public void Highlight(Vector2Int square)
     {
@@ -93,16 +93,13 @@ public class Board : MonoBehaviour
         {
             CapturePiece(maybeEnemyPiece);
         }
-        //En Passant checks
-        specialMoveChecker.CheckEnPassant(newPos, currentPiece);
-        if ((newPos.y - currentPiece.GetCurrentSquare().y == 2 || newPos.y - currentPiece.GetCurrentSquare().y == -2) && currentPiece is Pawn)
-        {
-            specialMoveChecker.PrepEnPassantTarget(currentPiece, newPos);
-        }
+
+
         //moving the piece
         currentPiece.SetCurrentSquare(newPos);
         currentPiece.transform.position = new Vector3(newPosX, newPosY, currentPiece.transform.position.z);
         ResetHighlights();
+
         //Check for Pawn promotion
         if (currentPiece is Pawn && (currentPiece.GetCurrentSquare().y == 0 || currentPiece.GetCurrentSquare().y == 7))
         {
@@ -110,6 +107,7 @@ public class Board : MonoBehaviour
             turnManager.StopAllPieces(pieces);
             return;
         }
+
         //Castling
         if (currentPiece is King king)
         {

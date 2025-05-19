@@ -47,7 +47,7 @@ public class Pawn : Piece
             }
         }
 
-        Piece enPassantPawn = board.specialMoveChecker.GetEnPassantTarget();
+        Piece enPassantPawn = specialMoveChecker.GetEnPassantTarget();
 
         if (enPassantPawn != null && enPassantPawn.GetCurrentSquare().y == currentSquare.y)
         {
