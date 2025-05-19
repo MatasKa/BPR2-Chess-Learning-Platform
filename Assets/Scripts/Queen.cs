@@ -23,7 +23,7 @@ public class Queen : Piece
             for (int o = 1; o <= 8; o++)
             {
                 Vector2Int newPos = base.currentSquare + directions[i] * o;
-                if (CanMoveToSquare(newPos, this))
+                if (CanMoveToSquare(newPos))
                 {
                     moves.Add(newPos);
                 }

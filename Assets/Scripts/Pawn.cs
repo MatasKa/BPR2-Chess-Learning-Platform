@@ -19,13 +19,13 @@ public class Pawn : Piece
 
         // Passive move checks
         Vector2Int newPos = base.currentSquare + new Vector2Int(0, +1 * reverse);
-        if (board.IsInsideBoard(newPos) == true && board.GetPieceOnSquare(newPos) == null)
+        if (CanMoveToSquare(newPos))
         {
             moves.Add(newPos);
 
             newPos = base.currentSquare + new Vector2Int(0, +2 * reverse);
             int yStartPos = (reverse == 1) ? 1 : 6;
-            if (board.GetPieceOnSquare(newPos) == null && currentSquare.y == yStartPos)
+            if (CanMoveToSquare(newPos) && currentSquare.y == yStartPos)
             {
                 moves.Add(newPos);
             }
@@ -41,11 +41,9 @@ public class Pawn : Piece
         for (int i = 0; i <= 1; i++)
         {
             newPos = base.currentSquare + AttackDir[i];
-            if (board.IsInsideBoard(newPos))
+            if (CanCapture(this, newPos))
             {
-                Piece temp = board.GetPieceOnSquare(newPos);
-                if (temp != null && board.IsEnemyPiece(this, temp) == true)
-                    moves.Add(newPos);
+                moves.Add(newPos);
             }
         }
 

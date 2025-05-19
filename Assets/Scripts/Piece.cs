@@ -6,14 +6,11 @@ public class Piece : MonoBehaviour
 {
     [SerializeField] protected Vector2Int currentSquare;
     [SerializeField] protected bool white = false;
-    protected Board board;
+    [SerializeField] protected Board board;
     protected bool selected = false;
     protected bool captured = false;
 
-    void Start()
-    {
-        board = FindAnyObjectByType<Board>();
-    }
+
     private void OnMouseDown()
     {
         if (captured == false)
@@ -75,15 +72,12 @@ public class Piece : MonoBehaviour
 
         return !inCheck;
     }
-    public bool CanMoveToSquare(Vector2Int pos, Piece piece)
+    public bool CanMoveToSquare(Vector2Int pos)
     {
         if (board == null)
         {
             board = FindAnyObjectByType<Board>();
         }
-        //Debug.Log(piece.gameObject.name + " tikrins, type: " + piece);
-        //Debug.Log(pos + " Inside board " + board.IsInsideBoard(pos));
-        //Debug.Log(pos + " Get piece " + board.GetPieceOnSquare(pos));
 
         if (board.IsInsideBoard(pos) && (board.GetPieceOnSquare(pos) == null))
         {

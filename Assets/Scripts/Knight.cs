@@ -21,7 +21,7 @@ public class Knight : Piece
         foreach (Vector2Int dir in directions)
         {
             Vector2Int newPos = currentSquare + dir;
-            if (CanMoveToSquare(newPos, this) || CanCapture(this, newPos))
+            if (CanMoveToSquare(newPos) || CanCapture(this, newPos))
             {
                 moves.Add(newPos);
             }

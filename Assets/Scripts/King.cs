@@ -50,7 +50,7 @@ public class King : Piece
         {
             Vector2Int newPos = base.currentSquare + dir;
 
-            if (CanMoveToSquare(newPos, this) || CanCapture(this, newPos))
+            if (CanMoveToSquare(newPos) || CanCapture(this, newPos))
             {
                 moves.Add(newPos);
             }
