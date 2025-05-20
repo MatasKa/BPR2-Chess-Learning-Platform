@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class SpecialMoveChecker : MonoBehaviour
@@ -134,6 +135,7 @@ public class SpecialMoveChecker : MonoBehaviour
     public bool PassesCheckKingsideCastle(bool isWhite)
     {
         int Ypos = (isWhite == true) ? 0 : 7;
+        Debug.Log("Chech KINGSIDE, Y " + Ypos);
         foreach (Piece piece in board.GetAllPieces())
         {
             if (!piece.IsCaptured() && piece.IsWhite() != isWhite)
@@ -143,22 +145,31 @@ public class SpecialMoveChecker : MonoBehaviour
                 {
                     moves = king.StandartMoves();
                 }
+                else if (piece is Pawn pawn)
+                {
+                    moves = pawn.PossibleAttacks();
+                }
                 else
                 {
                     moves = piece.PossibleMoves();
                 }
+
                 if (moves.Contains(new Vector2Int(4, Ypos))
                 || moves.Contains(new Vector2Int(5, Ypos))
                 || moves.Contains(new Vector2Int(6, Ypos)))
+                {
                     return true;
+                }
             }
         }
+
         return false;
     }
 
     public bool PassesCheckQueensideCastle(bool isWhite)
     {
         int Ypos = (isWhite == true) ? 0 : 7;
+        Debug.Log("Chech QUEENSide, Y " + Ypos);
         foreach (Piece piece in board.GetAllPieces())
         {
             if (!piece.IsCaptured() && piece.IsWhite() != isWhite)
@@ -168,15 +179,24 @@ public class SpecialMoveChecker : MonoBehaviour
                 {
                     moves = king.StandartMoves();
                 }
+                else if (piece is Pawn pawn)
+                {
+                    moves = pawn.PossibleAttacks();
+                }
                 else
                 {
                     moves = piece.PossibleMoves();
                 }
+
+                //Debug.Log("moves Queensid check " + moves);
+
                 if (moves.Contains(new Vector2Int(1, Ypos))
                 || moves.Contains(new Vector2Int(2, Ypos))
                 || moves.Contains(new Vector2Int(3, Ypos))
                 || moves.Contains(new Vector2Int(4, Ypos)))
+                {
                     return true;
+                }
             }
         }
         return false;

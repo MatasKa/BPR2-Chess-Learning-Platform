@@ -59,4 +59,21 @@ public class Pawn : Piece
         }
         return moves;
     }
+
+    public List<Vector2Int> PossibleAttacks()
+    {
+        List<Vector2Int> attacks = new List<Vector2Int>();
+
+        int reverse = 1;
+        if (white == false)
+        {
+            reverse = -1;
+        }
+
+        attacks.Add(base.currentSquare + new Vector2Int(-1, +1 * reverse));
+        attacks.Add(base.currentSquare + new Vector2Int(+1, +1 * reverse));
+
+        return attacks;
+    }
+
 }

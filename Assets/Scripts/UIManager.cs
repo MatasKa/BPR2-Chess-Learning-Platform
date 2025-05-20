@@ -50,7 +50,7 @@ public class UIManager : MonoBehaviour
         int W = (white == true) ? 0 : 1;
         pawnPromotionPopUp[W].SetActive(true);
         float offset = (UIpos.y == 1) ? -2.35f : 2.35f;
-        Debug.Log("Y pos yr " + UIpos.y + " therefore offset is " + offset);
+        //Debug.Log("Y pos yr " + UIpos.y + " therefore offset is " + offset);
         pawnPromotionPopUp[W].transform.position = new Vector3(UIpos.x, UIpos.y + offset, pawnPromotionPopUp[W].transform.position.z);
     }
 
