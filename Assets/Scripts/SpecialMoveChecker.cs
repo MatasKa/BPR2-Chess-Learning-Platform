@@ -21,12 +21,13 @@ public class SpecialMoveChecker : MonoBehaviour
         {
             PrepEnPassantTarget(board.GetCurrentPiece(), newPos);
         }
-
+        //Debug.Log("Pawn Promo Check incoming: " + board.GetCurrentPiece() + " and position is " + board.GetCurrentPiece().GetCurrentSquare());
         //Check for Pawn promotion
-        if (board.GetCurrentPiece() is Pawn && (board.GetCurrentPiece().GetCurrentSquare().y == 0 || board.GetCurrentPiece().GetCurrentSquare().y == 7))
+        if (board.GetCurrentPiece() is Pawn && (newPos.y == 0 || newPos.y == 7))
         {
+            //Debug.Log("Pawn Promo");
             board.uiManager.ShowPawnPromotionUI(board.GetCurrentPiece().GetCurrentSquare(), board.GetCurrentPiece().IsWhite());
-            board.turnManager.StopAllPieces(board.GetAllPieces());
+            board.turnManager.StopAllPieces(board.GetAllPieceObjects());
             return;
         }
 
@@ -63,10 +64,8 @@ public class SpecialMoveChecker : MonoBehaviour
 
     public void CheckEnPassant(Vector2Int newPos, Piece piece)
     {
-        Debug.Log("en pas " + newPos + " square " + enPassantSquare + " piece " + piece);
         if (newPos == enPassantSquare && piece is Pawn)
         {
-            Debug.Log("en passantAAAAA");
             board.CapturePiece(enPassantTargetPawn);
         }
         PrepEnPassantTarget(null, new Vector2Int(-1, -1)); //cant call pawn.IsWhite if pawn is null
@@ -93,12 +92,13 @@ public class SpecialMoveChecker : MonoBehaviour
     {
         StartCoroutine(ReplacePieceType(promotion));
         board.uiManager.ChangePieceSprite(board.GetCurrentPiece().gameObject, promotion, board.GetCurrentPiece().IsWhite());
-        board.turnManager.SwitchTurn(board.GetAllPieces(), board);
+        //board.turnManager.SwitchTurn(board.GetAllPieceObjects(), board);
     }
 
     IEnumerator ReplacePieceType(int promotion)
     {
-        int index = System.Array.IndexOf(board.GetAllPieces(), board.GetCurrentPiece());
+        int indexPiece = System.Array.IndexOf(board.GetAllPieces(), board.GetCurrentPiece());
+        int indexObject = System.Array.IndexOf(board.GetAllPieceObjects(), board.GetCurrentPiece().gameObject);
 
         Vector2Int pos = board.GetCurrentPiece().GetCurrentSquare();
         Quaternion savedRotation = board.GetCurrentPiece().transform.rotation;
@@ -114,7 +114,8 @@ public class SpecialMoveChecker : MonoBehaviour
         newPiece.SetWhite(isWhite);
         newPiece.SetCurrentSquare(pos);
 
-        board.GetAllPieces()[index] = newPiece;
+        board.GetAllPieces()[indexPiece] = newPiece;
+        board.GetAllPieceObjects()[indexObject] = newPiece.gameObject;
     }
 
 
@@ -130,7 +131,6 @@ public class SpecialMoveChecker : MonoBehaviour
         }
     }
 
-    //checks if king does not pass (and enter) a check when castling (Kingside)
     public bool PassesCheckKingsideCastle(bool isWhite)
     {
         int Ypos = (isWhite == true) ? 0 : 7;
@@ -172,7 +172,6 @@ public class SpecialMoveChecker : MonoBehaviour
                 {
                     moves = piece.PossibleMoves();
                 }
-                Debug.Log("checkina Y: " + Ypos);
                 if (moves.Contains(new Vector2Int(1, Ypos))
                 || moves.Contains(new Vector2Int(2, Ypos))
                 || moves.Contains(new Vector2Int(3, Ypos))

@@ -12,6 +12,7 @@ public class Board : MonoBehaviour
     public UIManager uiManager { get; set; }
 
     private Piece[] pieces;
+    private GameObject[] pieceObjects;
     private Piece whiteKing;
     private Piece blackKing;
     private Piece currentPiece;
@@ -28,6 +29,13 @@ public class Board : MonoBehaviour
         pieces = FindObjectsByType<Piece>(FindObjectsSortMode.None);
         whiteKing = GameObject.Find("White King").GetComponent<Piece>();
         blackKing = GameObject.Find("Black King").GetComponent<Piece>();
+        pieceObjects = new GameObject[pieces.Length];
+        for (int i = 0; i < pieces.Length; i++)
+        {
+            pieceObjects[i] = pieces[i].gameObject;
+        }
+        //Debug.Log("Board " + pieceObjects[0].name);
+
     }
     public void Highlight(Vector2Int square)
     {
@@ -80,6 +88,10 @@ public class Board : MonoBehaviour
     {
         return pieces;
     }
+    public GameObject[] GetAllPieceObjects()
+    {
+        return pieceObjects;
+    }
     public void MovePiece(string square)
     {
         int newPosX = int.Parse(square[0].ToString());
@@ -99,8 +111,8 @@ public class Board : MonoBehaviour
         currentPiece.transform.position = new Vector3(newPosX, newPosY, currentPiece.transform.position.z);
         ResetHighlights();
 
-
-        turnManager.SwitchTurn(pieces, this);
+        //Debug.Log("Will change turns soon");
+        turnManager.SwitchTurn(pieceObjects, this);
     }
 
 

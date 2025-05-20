@@ -11,13 +11,14 @@ public class TurnManager : MonoBehaviour
     {
         timer.OnTimeEnd += OutOfTime;
     }
-    public void SwitchTurn(Piece[] pieces, Board board)
+    public void SwitchTurn(GameObject[] pieces, Board board)
     {
         whiteTurn = !whiteTurn;
-
-        foreach (Piece piece in pieces)
+        //Debug.Log("TurnP " + pieces[0].name);
+        foreach (GameObject piece in pieces)
         {
-            bool shouldEnable = piece.IsWhite() == whiteTurn;
+            //Debug.Log("TurnP " + piece.name);
+            bool shouldEnable = piece.name.Contains("White") == whiteTurn;
             piece.GetComponent<BoxCollider2D>().enabled = shouldEnable;
         }
 
@@ -29,13 +30,13 @@ public class TurnManager : MonoBehaviour
         {
             timer.StopTimer();
         }
-
+        //Debug.Log("turns changed");
         CheckForEndGame(board);
     }
 
-    public void StopAllPieces(Piece[] pieces)
+    public void StopAllPieces(GameObject[] pieces)
     {
-        foreach (Piece piece in pieces)
+        foreach (GameObject piece in pieces)
         {
             piece.GetComponent<BoxCollider2D>().enabled = false;
         }
@@ -58,7 +59,7 @@ public class TurnManager : MonoBehaviour
             {
                 uiManager.ShowGameEndUI(3);
             }
-            StopAllPieces(board.GetPieces());
+            StopAllPieces(board.GetAllPieceObjects());
         }
     }
 

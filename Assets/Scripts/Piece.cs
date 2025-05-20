@@ -11,7 +11,14 @@ public class Piece : MonoBehaviour
     protected bool selected = false;
     protected bool captured = false;
 
-
+    private void Awake()
+    {
+        if (board == null || specialMoveChecker == null)
+        {
+            board = FindAnyObjectByType<Board>();
+            specialMoveChecker = FindAnyObjectByType<SpecialMoveChecker>();
+        }
+    }
     private void OnMouseDown()
     {
         if (captured == false)
