@@ -21,6 +21,42 @@ public class SpecialMoveChecker : MonoBehaviour
         {
             PrepEnPassantTarget(board.GetCurrentPiece(), newPos);
         }
+
+        //Check for Pawn promotion
+        if (board.GetCurrentPiece() is Pawn && (board.GetCurrentPiece().GetCurrentSquare().y == 0 || board.GetCurrentPiece().GetCurrentSquare().y == 7))
+        {
+            board.uiManager.ShowPawnPromotionUI(board.GetCurrentPiece().GetCurrentSquare(), board.GetCurrentPiece().IsWhite());
+            board.turnManager.StopAllPieces(board.GetAllPieces());
+            return;
+        }
+
+        //Castling
+        if (board.GetCurrentPiece() is King king)
+        {
+            if (king.GetHasMoved() == false)
+            {
+                int Ypos = (king.IsWhite() == true) ? 0 : 7;
+                new Vector2Int(6, Ypos);
+                //kingside
+                if (newPos == new Vector2Int(6, Ypos))
+                {
+                    board.GetPieceOnSquare(new Vector2Int(7, Ypos)).transform.position = new Vector3(5, Ypos, board.GetPieceOnSquare(new Vector2Int(7, Ypos)).transform.position.z);
+                    board.GetPieceOnSquare(new Vector2Int(7, Ypos)).SetCurrentSquare(new Vector2Int(5, Ypos));
+                }
+                //queenside
+                if (newPos == new Vector2Int(1, Ypos))
+                {
+                    board.GetPieceOnSquare(new Vector2Int(0, Ypos)).transform.position = new Vector3(2, Ypos, board.GetPieceOnSquare(new Vector2Int(0, Ypos)).transform.position.z);
+                    board.GetPieceOnSquare(new Vector2Int(0, Ypos)).SetCurrentSquare(new Vector2Int(0, Ypos));
+                }
+                king.SetHasMoved(true);
+            }
+        }
+        if (board.GetCurrentPiece() is Rook rook)
+        {
+            rook.SetHasMoved(true);
+        }
+
     }
 
 

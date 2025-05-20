@@ -593,7 +593,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1313,6 +1313,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 17
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -1654,7 +1666,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1854,7 +1866,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2052,6 +2064,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 46
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -2395,7 +2419,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2765,6 +2789,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 77
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -3333,6 +3369,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 07
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -3809,6 +3857,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 27
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -3999,7 +4059,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4197,6 +4257,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 31
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -4387,7 +4459,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4585,6 +4657,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 20
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -4773,6 +4857,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 30
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -5034,7 +5130,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5618,6 +5714,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 16
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -5806,6 +5914,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 11
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -6392,7 +6512,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6780,6 +6900,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 41
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -7121,7 +7253,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7319,6 +7451,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 40
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -7507,6 +7651,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 66
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -7846,6 +8002,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 71
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -8036,7 +8204,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8236,7 +8404,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8434,6 +8602,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 61
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -8624,7 +8804,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9126,7 +9306,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9326,7 +9506,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9524,6 +9704,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 70
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -9758,7 +9950,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9956,6 +10148,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 60
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -10297,7 +10501,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10646,6 +10850,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 01
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -10985,6 +11201,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 26
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -11173,6 +11401,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 36
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -11361,6 +11601,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 67
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -11551,7 +11803,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11751,7 +12003,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11951,7 +12203,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12149,6 +12401,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 47
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -12504,7 +12768,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12704,7 +12968,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12902,6 +13166,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 76
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -13092,7 +13368,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13441,6 +13717,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 10
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -13631,7 +13919,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13982,7 +14270,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14180,6 +14468,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 51
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -14368,6 +14668,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 57
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -14741,7 +15053,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14941,7 +15253,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15331,7 +15643,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15531,7 +15843,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15731,7 +16043,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16340,7 +16652,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16699,6 +17011,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 37
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -16887,6 +17211,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 06
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -17114,6 +17450,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 50
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -17511,6 +17859,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 00
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -17701,7 +18061,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17899,6 +18259,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 56
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -18087,6 +18459,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1797327834}
+        m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
+        m_MethodName: CheckSpecialMoves
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 21
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
         m_MethodName: MovePiece
@@ -18546,7 +18930,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1797327834}
         m_TargetAssemblyTypeName: SpecialMoveChecker, Assembly-CSharp
-        m_MethodName: EnPassant
+        m_MethodName: CheckSpecialMoves
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

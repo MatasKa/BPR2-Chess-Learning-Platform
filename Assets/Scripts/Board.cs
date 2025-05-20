@@ -10,7 +10,6 @@ public class Board : MonoBehaviour
     [SerializeField] private BoardRenderer boardRenderer;
     public TurnManager turnManager { get; set; }
     public UIManager uiManager { get; set; }
-    //public SpecialMoveChecker specialMoveChecker;
 
     private Piece[] pieces;
     private Piece whiteKing;
@@ -100,40 +99,7 @@ public class Board : MonoBehaviour
         currentPiece.transform.position = new Vector3(newPosX, newPosY, currentPiece.transform.position.z);
         ResetHighlights();
 
-        //Check for Pawn promotion
-        if (currentPiece is Pawn && (currentPiece.GetCurrentSquare().y == 0 || currentPiece.GetCurrentSquare().y == 7))
-        {
-            uiManager.ShowPawnPromotionUI(currentPiece.GetCurrentSquare(), currentPiece.IsWhite());
-            turnManager.StopAllPieces(pieces);
-            return;
-        }
 
-        //Castling
-        if (currentPiece is King king)
-        {
-            if (king.GetHasMoved() == false)
-            {
-                int Ypos = (king.IsWhite() == true) ? 0 : 7;
-                new Vector2Int(6, Ypos);
-                //kingside
-                if (newPos == new Vector2Int(6, Ypos))
-                {
-                    GetPieceOnSquare(new Vector2Int(7, Ypos)).transform.position = new Vector3(5, Ypos, GetPieceOnSquare(new Vector2Int(7, Ypos)).transform.position.z);
-                    GetPieceOnSquare(new Vector2Int(7, Ypos)).SetCurrentSquare(new Vector2Int(5, Ypos));
-                }
-                //queenside
-                if (newPos == new Vector2Int(1, Ypos))
-                {
-                    GetPieceOnSquare(new Vector2Int(0, Ypos)).transform.position = new Vector3(2, Ypos, GetPieceOnSquare(new Vector2Int(0, Ypos)).transform.position.z);
-                    GetPieceOnSquare(new Vector2Int(0, Ypos)).SetCurrentSquare(new Vector2Int(0, Ypos));
-                }
-                king.SetHasMoved(true);
-            }
-        }
-        if (currentPiece is Rook rook)
-        {
-            rook.SetHasMoved(true);
-        }
         turnManager.SwitchTurn(pieces, this);
     }
 
