@@ -7,12 +7,10 @@ public class AIController : MonoBehaviour
     [Tooltip("Drag in your ChessAI component here")]
     public ChessAI ai;
 
-    // The board as an [8,8,12] tensor, updated each move
     private float[,,] currentTensor;
+    private const string START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
-    // Standard chess starting position FEN
-    private const string START_FEN =
-        "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    [SerializeField] private MoveHistory moveHistory;
 
     void Start()
     {
@@ -23,34 +21,47 @@ public class AIController : MonoBehaviour
             return;
         }
 
-        // Initialize tensor from the starting FEN
         currentTensor = FENToTensor(START_FEN);
 
-        // Let the AI pick its very first move and log it
+        // Let the AI pick its first move
         string first = ai.PredictMove(currentTensor);
         Debug.Log($"AI first move: {first}");
 
-        // Apply it so currentTensor now reflects that move
-        ApplyUciMove(currentTensor, first);
+        ApplyMove(first);
     }
 
     void Update()
     {
-        // If the player presses 'A', get the AI's next move on the updated board
         if (Input.GetKeyDown(KeyCode.A))
         {
+            // Rebuild the tensor from move history
+            moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
+
+            // Now predict the move based on the full current state
             string next = ai.PredictMove(currentTensor);
             Debug.Log($"AI next move: {next}");
-            ApplyUciMove(currentTensor, next);
+
+            // Apply and record the move
+            ApplyMove(next);
+        }
+
+        // Optional: manual tensor rebuild (for debugging)
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
+            Debug.Log("Tensor rebuilt from history.");
         }
     }
 
-    /// <summary>
-    /// Applies a UCI move (e.g. "e2e4" or "a7a8q") to the given board tensor in‐place.
-    /// </summary>
+
+    void ApplyMove(string uciMove)
+    {
+        //ApplyUciMove(currentTensor, uciMove);
+        moveHistory.AddMove(uciMove);
+    }
+
     void ApplyUciMove(float[,,] tensor, string uci)
     {
-        // helper to map FEN ranks/files → tensor row/col
         int FileToCol(char f) => f - 'a';
         int RankToRow(char r) => r - '1';
 
@@ -59,7 +70,6 @@ public class AIController : MonoBehaviour
         int toCol = FileToCol(uci[2]);
         int toRow = RankToRow(uci[3]);
 
-        // 1) Find which plane holds the moving piece
         int plane = -1;
         for (int p = 0; p < 12; p++)
         {
@@ -72,18 +82,15 @@ public class AIController : MonoBehaviour
 
         if (plane < 0)
         {
-            Debug.LogError($"No piece found at {uci.Substring(0, 2)} to move!");
+            //Debug.LogError($"No piece found at {uci.Substring(0, 2)} to move!");
             return;
         }
 
-        // 2) Clear the origin
         tensor[fromRow, fromCol, plane] = 0f;
 
-        // 3) Handle promotions (uci length == 5)
         if (uci.Length == 5)
         {
-            // remove the pawn from origin already done; now pick new plane
-            char promo = uci[4]; // 'q','r','b','n'
+            char promo = uci[4]; // e.g., 'q'
             var promoMap = new Dictionary<char, int> {
                 {'q', 4}, {'r', 3}, {'b', 2}, {'n', 1}
             };
@@ -92,16 +99,9 @@ public class AIController : MonoBehaviour
             plane = basePlane + promoMap[promo];
         }
 
-        // 4) Place the piece at the destination
         tensor[toRow, toCol, plane] = 1f;
     }
 
-    /// <summary>
-    /// Converts a FEN string into a [8,8,12] float tensor:
-    ///   - ranks '1'→row7 becomes tensor row0, so we invert via 8 - rank 
-    ///   - files 'a'→col0, … 'h'→col7
-    ///   - planes P,N,B,R,Q,K → 0–5, p,n,b,r,q,k → 6–11
-    /// </summary>
     private float[,,] FENToTensor(string fen)
     {
         var planes = new Dictionary<char, int> {
@@ -115,7 +115,6 @@ public class AIController : MonoBehaviour
 
         for (int r = 0; r < 8; r++)
         {
-            // invert so rank '1' (ranks[7]) → row 0
             string rank = ranks[7 - r];
             int file = 0;
             foreach (char c in rank)

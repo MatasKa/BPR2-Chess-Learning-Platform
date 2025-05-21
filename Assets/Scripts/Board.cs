@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class Board : MonoBehaviour
 {
     [SerializeField] private BoardRenderer boardRenderer;
+    [SerializeField] private MoveHistory moveHistory;
+
     public TurnManager turnManager { get; set; }
     public UIManager uiManager { get; set; }
 
@@ -105,6 +107,9 @@ public class Board : MonoBehaviour
             CapturePiece(maybeEnemyPiece);
         }
 
+        //add move to history of moves
+        string move = moveHistory.TranslateMoveToUci(currentPiece.GetCurrentSquare(), newPos);
+        moveHistory.AddMove(move);
 
         //moving the piece
         currentPiece.SetCurrentSquare(newPos);
