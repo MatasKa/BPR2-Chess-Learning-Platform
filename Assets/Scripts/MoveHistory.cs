@@ -9,7 +9,7 @@ public class MoveHistory : MonoBehaviour
     public void AddMove(string move)
     {
         moves.Add(move);
-        Debug.Log("added move " + move);
+        Debug.Log(string.Join(", ", moves));
     }
 
     public void ClearHistory()
@@ -24,13 +24,13 @@ public class MoveHistory : MonoBehaviour
 
     public string TranslateMoveToUci(Vector2Int FromSquare, Vector2Int ToSquare)
     {
-        string move = moveTranslator.SquareToUci(FromSquare) + moveTranslator.SquareToUci(ToSquare);
-        return move;
+        return moveTranslator.SquareToUci(FromSquare) + moveTranslator.SquareToUci(ToSquare);
     }
 
-
-
-
+    public Vector2Int TranslatePositionToSquare(string square)
+    {
+        return moveTranslator.UciToSquare(square);
+    }
 
     public void RebuildTensor(float[,,] tensor, System.Action<float[,,], string> applyMove, string startFEN, System.Func<string, float[,,]> fenToTensor)
     {

@@ -605,7 +605,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -613,6 +613,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 64
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &114254986
@@ -1069,6 +1081,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ai: {fileID: 142094673}
+  moveHistory: {fileID: 142094675}
+  board: {fileID: 1797327832}
 --- !u!114 &142094673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1399,7 +1413,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1750,7 +1764,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1758,6 +1772,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 35
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &280232943
@@ -1950,7 +1976,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1958,6 +1984,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 32
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &287686633
@@ -2150,7 +2188,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2158,6 +2196,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 46
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &306997106
@@ -2503,7 +2553,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2511,6 +2561,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 65
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &363442521
@@ -2875,7 +2937,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3454,7 +3516,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3942,7 +4004,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4142,7 +4204,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4150,6 +4212,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 42
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &552907730
@@ -4342,7 +4416,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4350,6 +4424,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 31
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &557731179
@@ -4542,7 +4628,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4550,6 +4636,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 52
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &578643235
@@ -4742,7 +4840,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4942,7 +5040,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5213,7 +5311,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5221,6 +5319,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 54
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &617018965
@@ -5799,7 +5909,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5807,6 +5917,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 16
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &689053889
@@ -5999,7 +6121,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6007,6 +6129,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 11
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &722997380
@@ -6595,7 +6729,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6603,6 +6737,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 55
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &762137211
@@ -6985,7 +7131,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6993,6 +7139,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 41
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &803360350
@@ -7336,7 +7494,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7344,6 +7502,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 02
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &812961234
@@ -7536,7 +7706,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7736,7 +7906,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7744,6 +7914,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 66
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &829669806
@@ -8087,7 +8269,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8095,6 +8277,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 71
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &854165135
@@ -8287,7 +8481,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8295,6 +8489,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 44
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &870688925
@@ -8487,7 +8693,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8495,6 +8701,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 14
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &885564029
@@ -8687,7 +8905,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8695,6 +8913,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 61
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &941944600
@@ -8887,7 +9117,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8895,6 +9125,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 05
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &987288451
@@ -9389,7 +9631,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9397,6 +9639,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 22
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1069278817
@@ -9589,7 +9843,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9597,6 +9851,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 75
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1071293407
@@ -9789,7 +10055,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10033,7 +10299,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10041,6 +10307,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 34
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1155070642
@@ -10233,7 +10511,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10584,7 +10862,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10592,6 +10870,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 73
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1268046948
@@ -10935,7 +11225,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10943,6 +11233,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 01
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1280025482
@@ -11286,7 +11588,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11294,6 +11596,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 26
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1290962067
@@ -11486,7 +11800,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11494,6 +11808,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 36
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1323758826
@@ -11686,7 +12012,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11886,7 +12212,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -11894,6 +12220,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 63
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1334714289
@@ -12086,7 +12424,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12094,6 +12432,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 43
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1374865823
@@ -12286,7 +12636,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12294,6 +12644,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 74
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1384410147
@@ -12486,7 +12848,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12851,7 +13213,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12859,6 +13221,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 13
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1431514737
@@ -13051,7 +13425,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13059,6 +13433,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 72
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1481060921
@@ -13251,7 +13637,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13259,6 +13645,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 76
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1484355374
@@ -13451,7 +13849,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13459,6 +13857,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 04
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1487770322
@@ -13802,7 +14212,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14002,7 +14412,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14010,6 +14420,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 24
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1564519358
@@ -14353,7 +14775,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14361,6 +14783,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 62
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1625291129
@@ -14553,7 +14987,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -14561,6 +14995,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 51
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1694809547
@@ -14753,7 +15199,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15136,7 +15582,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15144,6 +15590,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 23
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1731580130
@@ -15336,7 +15794,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15344,6 +15802,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 33
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1746745302
@@ -15726,7 +16196,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15734,6 +16204,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 25
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1754636319
@@ -15926,7 +16408,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15934,6 +16416,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 53
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1768984741
@@ -16126,7 +16620,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16134,6 +16628,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 03
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1785680334
@@ -16357,6 +16863,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   boardRenderer: {fileID: 1413943239}
   moveHistory: {fileID: 142094675}
+  specialMoveChecker: {fileID: 1797327834}
 --- !u!114 &1797327833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16736,7 +17243,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16744,6 +17251,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 12
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1836899208
@@ -17097,7 +17616,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17297,7 +17816,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17305,6 +17824,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 06
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &1980074127
@@ -17536,7 +18067,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -17946,7 +18477,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18146,7 +18677,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18154,6 +18685,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 15
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &2017971373
@@ -18346,7 +18889,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18354,6 +18897,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 56
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &2050371096
@@ -18546,7 +19101,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18554,6 +19109,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 21
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &2053840099
@@ -19015,7 +19582,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 1797327832}
         m_TargetAssemblyTypeName: Board, Assembly-CSharp
-        m_MethodName: MovePiece
+        m_MethodName: MovePlayerPiece
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19023,6 +19590,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 45
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 142094672}
+        m_TargetAssemblyTypeName: AIController, Assembly-CSharp
+        m_MethodName: DoPredictedMove
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!222 &2115907824

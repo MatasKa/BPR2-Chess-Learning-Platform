@@ -1,6 +1,8 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Collections;
+using System.Linq;
 
 public class AIController : MonoBehaviour
 {
@@ -11,6 +13,8 @@ public class AIController : MonoBehaviour
     private const string START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
     [SerializeField] private MoveHistory moveHistory;
+    [SerializeField] private Board board;
+
 
     void Start()
     {
@@ -24,40 +28,88 @@ public class AIController : MonoBehaviour
         currentTensor = FENToTensor(START_FEN);
 
         // Let the AI pick its first move
-        string first = ai.PredictMove(currentTensor);
-        Debug.Log($"AI first move: {first}");
+        //string first = ai.PredictMove(currentTensor);
+        //Debug.Log($"AI first move: {first}");
 
-        ApplyMove(first);
+        //ApplyMove(first);
     }
+    /*/
+        void Update()
+        {
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                // Rebuild the tensor from move history
+                moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
 
-    void Update()
+                // Now predict the move based on the full current state
+                string next = ai.PredictMove(currentTensor);
+                Debug.Log($"AI next move: {next}");
+
+                // Apply and record the move
+                ApplyMove(next);
+            }
+
+            // Optional: manual tensor rebuild (for debugging)
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
+                Debug.Log("Tensor rebuilt from history.");
+            }
+        }/*/
+
+    public void DoPredictedMove()
     {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            // Rebuild the tensor from move history
-            moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
-
-            // Now predict the move based on the full current state
-            string next = ai.PredictMove(currentTensor);
-            Debug.Log($"AI next move: {next}");
-
-            // Apply and record the move
-            ApplyMove(next);
-        }
-
-        // Optional: manual tensor rebuild (for debugging)
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
-            Debug.Log("Tensor rebuilt from history.");
-        }
+        StartCoroutine(DoPredictedMoveCoroutine());
     }
-
-
-    void ApplyMove(string uciMove)
+    public IEnumerator DoPredictedMoveCoroutine()
     {
-        //ApplyUciMove(currentTensor, uciMove);
-        moveHistory.AddMove(uciMove);
+        while (true)
+        {
+            moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
+            string[] topMovesRaw = ai.PredictTopMoves(currentTensor, 2184);
+
+            // Deduplicate and filter invalid-length moves
+            var topMoves = topMovesRaw
+                .Where(m => m.Length >= 4)
+                .Distinct()
+                .ToList();
+
+            if (topMoves.Count == 0)
+            {
+                Debug.LogWarning("AI prediction returned no valid moves. Retrying...");
+                yield return new WaitForSeconds(0.5f);
+                continue;
+            }
+
+            //Debug.Log($"AI predicted top moves: {string.Join(", ", topMoves)}");
+
+            bool played = false;
+            foreach (string move in topMoves)
+            {
+                var from = moveHistory.TranslatePositionToSquare(move.Substring(0, 2));
+                var to = moveHistory.TranslatePositionToSquare(move.Substring(2, 2));
+
+                if (board.IsAIMoveLegal(from, to))
+                {
+                    yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 5f));
+
+                    Debug.Log($"AI plays move: {move}");
+                    board.MoveAIPiece(from, to);
+                    played = true;
+                    break;
+                }
+                else
+                {
+                    Debug.Log($"AI move {move} was illegal");
+                }
+            }
+
+            if (played)
+                yield break;
+
+            Debug.LogWarning("None of the AI's top predicted moves were legal. Retrying...");
+            yield return new WaitForSeconds(0.5f);
+        }
     }
 
     void ApplyUciMove(float[,,] tensor, string uci)

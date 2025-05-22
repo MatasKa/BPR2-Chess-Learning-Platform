@@ -42,6 +42,11 @@ public class TurnManager : MonoBehaviour
         }
     }
 
+    public bool IsPlayerWhite()
+    {
+        return playerSideWhite;
+    }
+
     private void OutOfTime()
     {
         uiManager.ShowGameEndUI(4);

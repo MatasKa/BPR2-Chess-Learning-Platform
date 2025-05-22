@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Rook : Piece
 {
-    private bool hasMoved = false;
     //Don't forget to check castling!!!
 
     public override List<Vector2Int> PossibleMoves()
@@ -39,15 +38,5 @@ public class Rook : Piece
         }
 
         return moves;
-    }
-
-    public void SetHasMoved(bool moved)
-    {
-        hasMoved = moved;
-    }
-
-    public bool GetHasMoved()
-    {
-        return hasMoved;
     }
 }

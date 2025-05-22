@@ -9,6 +9,7 @@ public class Board : MonoBehaviour
 {
     [SerializeField] private BoardRenderer boardRenderer;
     [SerializeField] private MoveHistory moveHistory;
+    [SerializeField] private SpecialMoveChecker specialMoveChecker;
 
     public TurnManager turnManager { get; set; }
     public UIManager uiManager { get; set; }
@@ -94,7 +95,7 @@ public class Board : MonoBehaviour
     {
         return pieceObjects;
     }
-    public void MovePiece(string square)
+    public void MovePlayerPiece(string square)
     {
         int newPosX = int.Parse(square[0].ToString());
         int newPosY = int.Parse(square[1].ToString());
@@ -117,10 +118,80 @@ public class Board : MonoBehaviour
         ResetHighlights();
 
         //Debug.Log("Will change turns soon");
+        currentPiece.SetHasMoved(true);
         turnManager.SwitchTurn(pieceObjects, this);
     }
 
+    public bool IsAIMoveLegal(Vector2Int fromPos, Vector2Int ToPos)
+    {
+        if (GetPieceOnSquare(fromPos) != null)
+        {
+            if (GetPieceOnSquare(fromPos).PossibleMoves().Contains(ToPos) && turnManager.IsPlayerWhite() != GetPieceOnSquare(fromPos).IsWhite() && GetPieceOnSquare(fromPos).IsMoveLegal(ToPos))
+            {
+                return true;
+            }
+            else
+            {
+                Debug.Log("AI bande judint " + GetPieceOnSquare(fromPos).name + " iš " + fromPos + " į " + ToPos);
+                return false;
+            }
+        }
+        else
+        {
+            Debug.Log("AI bande judint nieka iš " + fromPos + " į " + ToPos);
+            return false;
 
+        }
+    }
+
+    public void MoveAIPiece(Vector2Int fromPos, Vector2Int ToPos)
+    {
+        currentPiece = GetPieceOnSquare(fromPos);
+
+        //capture piece if there is one
+        Piece maybeEnemyPiece = GetPieceOnSquare(ToPos);
+        if (maybeEnemyPiece != null && IsEnemyPiece(currentPiece, maybeEnemyPiece))
+        {
+            CapturePiece(maybeEnemyPiece);
+        }
+
+        //add move to history of moves
+        string move = moveHistory.TranslateMoveToUci(fromPos, ToPos);
+        moveHistory.AddMove(move);
+
+
+        specialMoveChecker.CheckSpecialMoves(ToPos.x.ToString() + ToPos.y.ToString() + "AI");
+        //checking special moves not in the AI checker :(
+        /*/Castling
+        int W = (piece.IsWhite() == true) ? 0 : 7;
+        if (piece.GetHasMoved() == false && fromPos == new Vector2Int(4, W) && (ToPos == new Vector2Int(1, W) || ToPos == new Vector2Int(6, W)))
+        {
+            if (ToPos == new Vector2Int(6, W))
+            {
+                GetPieceOnSquare(new Vector2Int(7, W)).transform.position = new Vector3(5, W, GetPieceOnSquare(new Vector2Int(7, W)).transform.position.z);
+                GetPieceOnSquare(new Vector2Int(7, W)).SetCurrentSquare(new Vector2Int(5, W));
+            }
+            //queenside
+            if (ToPos == new Vector2Int(1, W))
+            {
+                GetPieceOnSquare(new Vector2Int(0, W)).transform.position = new Vector3(2, W, GetPieceOnSquare(new Vector2Int(0, W)).transform.position.z);
+                GetPieceOnSquare(new Vector2Int(0, W)).SetCurrentSquare(new Vector2Int(0, W));
+            }
+        }/*/
+
+
+        //moving the piece
+        currentPiece.SetCurrentSquare(ToPos);
+        currentPiece.transform.position = new Vector3(ToPos.x, ToPos.y, currentPiece.transform.position.z);
+        ResetHighlights();
+        /*/
+                if ((piece.GetCurrentSquare().y == 0 || piece.GetCurrentSquare().y == 0) && piece is Pawn)
+                {
+                    specialMoveChecker.PromotePawn(0);
+                }/*/
+        //Debug.Log("Will change turns soon");
+        turnManager.SwitchTurn(pieceObjects, this);
+    }
 
     public void CapturePiece(Piece piece)
     {

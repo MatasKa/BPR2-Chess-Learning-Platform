@@ -16,7 +16,14 @@ public class SpecialMoveChecker : MonoBehaviour
     {
         int newPosX = int.Parse(square[0].ToString());
         int newPosY = int.Parse(square[1].ToString());
+
+        bool AIMove = false;
+        if (square.Length != 2)
+        {
+            AIMove = true;
+        }
         Vector2Int newPos = new Vector2Int(newPosX, newPosY);
+
         CheckEnPassant(newPos, board.GetCurrentPiece());
         if ((newPos.y - board.GetCurrentPiece().GetCurrentSquare().y == 2 || newPos.y - board.GetCurrentPiece().GetCurrentSquare().y == -2) && board.GetCurrentPiece() is Pawn)
         {
@@ -26,10 +33,17 @@ public class SpecialMoveChecker : MonoBehaviour
         //Check for Pawn promotion
         if (board.GetCurrentPiece() is Pawn && (newPos.y == 0 || newPos.y == 7))
         {
-            //Debug.Log("Pawn Promo");
-            board.uiManager.ShowPawnPromotionUI(board.GetCurrentPiece().GetCurrentSquare(), board.GetCurrentPiece().IsWhite());
-            board.turnManager.StopAllPieces(board.GetAllPieceObjects());
-            return;
+            if (AIMove == true)
+            {
+                PromotePawn(0);
+            }
+            else
+            {
+                //Debug.Log("Pawn Promo");
+                board.uiManager.ShowPawnPromotionUI(board.GetCurrentPiece().GetCurrentSquare(), board.GetCurrentPiece().IsWhite());
+                board.turnManager.StopAllPieces(board.GetAllPieceObjects());
+                return;
+            }
         }
 
         //Castling
@@ -49,7 +63,7 @@ public class SpecialMoveChecker : MonoBehaviour
                 if (newPos == new Vector2Int(1, Ypos))
                 {
                     board.GetPieceOnSquare(new Vector2Int(0, Ypos)).transform.position = new Vector3(2, Ypos, board.GetPieceOnSquare(new Vector2Int(0, Ypos)).transform.position.z);
-                    board.GetPieceOnSquare(new Vector2Int(0, Ypos)).SetCurrentSquare(new Vector2Int(0, Ypos));
+                    board.GetPieceOnSquare(new Vector2Int(0, Ypos)).SetCurrentSquare(new Vector2Int(2, Ypos));
                 }
                 king.SetHasMoved(true);
             }

@@ -3,12 +3,11 @@ using UnityEngine;
 
 public class King : Piece
 {
-    private bool hasMoved = false;
     public override List<Vector2Int> PossibleMoves()
     {
         List<Vector2Int> moves = StandartMoves();
 
-        if (hasMoved == false)
+        if (base.hasMoved == false)
         {
             //castling 0-0
             if (board.GetPieceOnSquare(currentSquare + new Vector2Int(1, 0)) == null
@@ -56,14 +55,5 @@ public class King : Piece
             }
         }
         return moves;
-    }
-
-    public void SetHasMoved(bool moved)
-    {
-        hasMoved = moved;
-    }
-    public bool GetHasMoved()
-    {
-        return hasMoved;
     }
 }

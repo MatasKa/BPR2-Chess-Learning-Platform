@@ -10,6 +10,7 @@ public class Piece : MonoBehaviour
     [SerializeField] protected SpecialMoveChecker specialMoveChecker;
     protected bool selected = false;
     protected bool captured = false;
+    protected bool hasMoved = false;
 
     private void Awake()
     {
@@ -59,6 +60,16 @@ public class Piece : MonoBehaviour
     {
         currentSquare = square;
     }
+    public void SetHasMoved(bool moved)
+    {
+        hasMoved = moved;
+    }
+
+    public bool GetHasMoved()
+    {
+        return hasMoved;
+    }
+
     public void ShowLegalMoves()
     {
         board.ResetHighlights();
