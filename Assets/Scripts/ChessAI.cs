@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ChessAI : MonoBehaviour
 {
-    [Header("Assign your ONNX here (Barracuda will convert it)")]
+    //[Header("Assign your ONNX here (Barracuda will convert it)")]
     public NNModel policyOnnxAsset;
 
     private Model _runtimeModel;

@@ -124,23 +124,30 @@ public class Board : MonoBehaviour
 
     public bool IsAIMoveLegal(Vector2Int fromPos, Vector2Int ToPos)
     {
-        if (GetPieceOnSquare(fromPos) != null)
+        if (uiManager.IsPlayerChoosingProm() == false)
         {
-            if (GetPieceOnSquare(fromPos).PossibleMoves().Contains(ToPos) && turnManager.IsPlayerWhite() != GetPieceOnSquare(fromPos).IsWhite() && GetPieceOnSquare(fromPos).IsMoveLegal(ToPos))
+            if (GetPieceOnSquare(fromPos) != null)
             {
-                return true;
+                if (GetPieceOnSquare(fromPos).PossibleMoves().Contains(ToPos) && turnManager.IsPlayerWhite() != GetPieceOnSquare(fromPos).IsWhite() && GetPieceOnSquare(fromPos).IsMoveLegal(ToPos))
+                {
+                    return true;
+                }
+                else
+                {
+                    Debug.Log("AI bande judint " + GetPieceOnSquare(fromPos).name + " iš " + fromPos + " į " + ToPos);
+                    return false;
+                }
             }
             else
             {
-                Debug.Log("AI bande judint " + GetPieceOnSquare(fromPos).name + " iš " + fromPos + " į " + ToPos);
+                Debug.Log("AI bande judint nieka iš " + fromPos + " į " + ToPos);
                 return false;
+
             }
         }
         else
         {
-            Debug.Log("AI bande judint nieka iš " + fromPos + " į " + ToPos);
             return false;
-
         }
     }
 

@@ -6,7 +6,7 @@ using System.Linq;
 
 public class AIController : MonoBehaviour
 {
-    [Tooltip("Drag in your ChessAI component here")]
+    //[Tooltip("Drag in your ChessAI component here")]
     public ChessAI ai;
 
     private float[,,] currentTensor;
@@ -33,29 +33,6 @@ public class AIController : MonoBehaviour
 
         //ApplyMove(first);
     }
-    /*/
-        void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                // Rebuild the tensor from move history
-                moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
-
-                // Now predict the move based on the full current state
-                string next = ai.PredictMove(currentTensor);
-                Debug.Log($"AI next move: {next}");
-
-                // Apply and record the move
-                ApplyMove(next);
-            }
-
-            // Optional: manual tensor rebuild (for debugging)
-            if (Input.GetKeyDown(KeyCode.R))
-            {
-                moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
-                Debug.Log("Tensor rebuilt from history.");
-            }
-        }/*/
 
     public void DoPredictedMove()
     {
@@ -66,7 +43,7 @@ public class AIController : MonoBehaviour
         while (true)
         {
             moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
-            string[] topMovesRaw = ai.PredictTopMoves(currentTensor, 2184);
+            string[] topMovesRaw = ai.PredictTopMoves(currentTensor, 1500); //2184
 
             // Deduplicate and filter invalid-length moves
             var topMoves = topMovesRaw

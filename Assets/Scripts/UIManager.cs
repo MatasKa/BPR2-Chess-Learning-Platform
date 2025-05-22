@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] pawnPromotionPopUp;
     [SerializeField] private Sprite[] promotionPieces;
 
+    private bool playerChoosingProm = false;
+
     void Update()
     {
         if (timerUI != null && endScreen.activeSelf == false)
@@ -52,12 +54,19 @@ public class UIManager : MonoBehaviour
         float offset = (UIpos.y == 1) ? -2.35f : 2.35f;
         //Debug.Log("Y pos yr " + UIpos.y + " therefore offset is " + offset);
         pawnPromotionPopUp[W].transform.position = new Vector3(UIpos.x, UIpos.y + offset, pawnPromotionPopUp[W].transform.position.z);
+        playerChoosingProm = true;
     }
 
     public void HidePawnPromotionUI(bool white)
     {
         int W = (white == true) ? 0 : 1;
         pawnPromotionPopUp[W].SetActive(false);
+        playerChoosingProm = false;
+    }
+
+    public bool IsPlayerChoosingProm()
+    {
+        return playerChoosingProm;
     }
 
     public void ChangePieceSprite(GameObject piece, int sprite, bool white)
