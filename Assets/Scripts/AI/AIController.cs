@@ -26,25 +26,26 @@ public class AIController : MonoBehaviour
 
         currentTensor = FENToTensor(START_FEN);
 
-        //string first = ai.PredictMove(currentTensor);
         if (board.turnManager.IsPlayerWhite() == false)
         {
-            DoPredictedMove();
+            StartCoroutine(DoFirstMove());
         }
     }
-
+    public IEnumerator DoFirstMove()
+    {
+        yield return new WaitForSeconds(0.5f);
+        DoPredictedMove();
+    }
     public void DoPredictedMove()
     {
         StartCoroutine(DoPredictedMoveCoroutine());
     }
+
     public IEnumerator DoPredictedMoveCoroutine()
     {
         while (true)
         {
-            if (moveHistory != null)
-            {
-                moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
-            }
+            moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
 
             string[] topMovesRaw = ai.PredictTopMoves(currentTensor, 2500);
 
@@ -56,7 +57,6 @@ public class AIController : MonoBehaviour
 
                 if (move.Length >= 4)
                 {
-                    // Avoid duplicates
                     if (!topMoves.Contains(move))
                     {
                         topMoves.Add(move);

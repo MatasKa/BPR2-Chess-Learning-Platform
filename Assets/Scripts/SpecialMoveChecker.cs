@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SpecialMoveChecker : MonoBehaviour
@@ -133,6 +134,8 @@ public class SpecialMoveChecker : MonoBehaviour
 
         board.GetAllPieces()[indexPiece] = newPiece;
         board.GetAllPieceObjects()[indexObject] = newPiece.gameObject;
+        board.turnManager.CheckForEndGame(board);
+
     }
 
 

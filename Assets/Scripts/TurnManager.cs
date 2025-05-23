@@ -62,7 +62,7 @@ public class TurnManager : MonoBehaviour
     {
         uiManager.ShowGameEndUI(4);
     }
-    private void CheckForEndGame(Board board)
+    public void CheckForEndGame(Board board)
     {
         if (board.HasAnyLegalMoves(whiteTurn) == false)
         {

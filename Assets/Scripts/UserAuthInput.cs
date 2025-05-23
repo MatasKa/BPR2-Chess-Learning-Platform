@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
 public class UserAuthInput : MonoBehaviour
@@ -25,10 +26,7 @@ public class UserAuthInput : MonoBehaviour
             var user = db.Login(loginUsernameInput.text, loginPasswordInput.text);
             if (user != null)
             {
-                Debug.Log($"Login successful!");
-                LoginMenu.SetActive(false);
-                RegisterMenu.SetActive(false);
-                ErrorText.SetActive(false);
+                SceneManager.LoadScene("Main Menu"); // not in scene controller because rushed (would do a User class, dontDestroy between scenes...)
             }
             else
             {
