@@ -112,6 +112,7 @@ public class Board : MonoBehaviour
         string move = moveHistory.TranslateMoveToUci(currentPiece.GetCurrentSquare(), newPos);
         moveHistory.AddMove(move);
 
+        boardRenderer.ShowLastMove(currentPiece.GetCurrentSquare(), newPos);
         //moving the piece
         currentPiece.SetCurrentSquare(newPos);
         currentPiece.transform.position = new Vector3(newPosX, newPosY, currentPiece.transform.position.z);
@@ -168,35 +169,14 @@ public class Board : MonoBehaviour
 
 
         specialMoveChecker.CheckSpecialMoves(ToPos.x.ToString() + ToPos.y.ToString() + "AI");
-        //checking special moves not in the AI checker :(
-        /*/Castling
-        int W = (piece.IsWhite() == true) ? 0 : 7;
-        if (piece.GetHasMoved() == false && fromPos == new Vector2Int(4, W) && (ToPos == new Vector2Int(1, W) || ToPos == new Vector2Int(6, W)))
-        {
-            if (ToPos == new Vector2Int(6, W))
-            {
-                GetPieceOnSquare(new Vector2Int(7, W)).transform.position = new Vector3(5, W, GetPieceOnSquare(new Vector2Int(7, W)).transform.position.z);
-                GetPieceOnSquare(new Vector2Int(7, W)).SetCurrentSquare(new Vector2Int(5, W));
-            }
-            //queenside
-            if (ToPos == new Vector2Int(1, W))
-            {
-                GetPieceOnSquare(new Vector2Int(0, W)).transform.position = new Vector3(2, W, GetPieceOnSquare(new Vector2Int(0, W)).transform.position.z);
-                GetPieceOnSquare(new Vector2Int(0, W)).SetCurrentSquare(new Vector2Int(0, W));
-            }
-        }/*/
 
+        boardRenderer.ShowLastMove(fromPos, ToPos);
 
         //moving the piece
         currentPiece.SetCurrentSquare(ToPos);
         currentPiece.transform.position = new Vector3(ToPos.x, ToPos.y, currentPiece.transform.position.z);
         ResetHighlights();
-        /*/
-                if ((piece.GetCurrentSquare().y == 0 || piece.GetCurrentSquare().y == 0) && piece is Pawn)
-                {
-                    specialMoveChecker.PromotePawn(0);
-                }/*/
-        //Debug.Log("Will change turns soon");
+
         turnManager.SwitchTurn(pieceObjects, this);
     }
 
