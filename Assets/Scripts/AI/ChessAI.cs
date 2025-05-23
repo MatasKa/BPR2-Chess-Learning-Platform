@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class ChessAI : MonoBehaviour
 {
-    //[Header("Assign your ONNX here (Barracuda will convert it)")]
     public NNModel policyOnnxAsset;
 
     private Model _runtimeModel;
@@ -14,11 +13,9 @@ public class ChessAI : MonoBehaviour
 
     void Awake()
     {
-        // 1) Load the converted Barracuda model
         _runtimeModel = ModelLoader.Load(policyOnnxAsset);
         _worker = WorkerFactory.CreateWorker(WorkerFactory.Type.Auto, _runtimeModel);
 
-        // 2) Load the move mapping JSON and populate both dictionary and list
         var jsonText = System.IO.File.ReadAllText(
             System.IO.Path.Combine(Application.streamingAssetsPath, "ChessAI/move_mapping.json")
         );
@@ -28,7 +25,6 @@ public class ChessAI : MonoBehaviour
         _intToMove = new Dictionary<int, string>();
         moveList = new List<string>();
 
-        // Sort keys numerically and build moveList accordingly
         var sortedKeys = new List<int>();
         foreach (var kv in stringDict)
         {

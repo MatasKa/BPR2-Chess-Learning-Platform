@@ -6,7 +6,6 @@ using System.Linq;
 
 public class AIController : MonoBehaviour
 {
-    //[Tooltip("Drag in your ChessAI component here")]
     public ChessAI ai;
 
     private float[,,] currentTensor;
@@ -46,13 +45,24 @@ public class AIController : MonoBehaviour
             {
                 moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
             }
-            string[] topMovesRaw = ai.PredictTopMoves(currentTensor, 1500); //2184
 
-            // Deduplicate and filter invalid-length moves
-            var topMoves = topMovesRaw
-                .Where(m => m.Length >= 4)
-                .Distinct()
-                .ToList();
+            string[] topMovesRaw = ai.PredictTopMoves(currentTensor, 2500);
+
+            List<string> topMoves = new List<string>();
+
+            for (int i = 0; i < topMovesRaw.Length; i++)
+            {
+                string move = topMovesRaw[i];
+
+                if (move.Length >= 4)
+                {
+                    // Avoid duplicates
+                    if (!topMoves.Contains(move))
+                    {
+                        topMoves.Add(move);
+                    }
+                }
+            }
 
             if (topMoves.Count == 0)
             {
@@ -61,36 +71,36 @@ public class AIController : MonoBehaviour
                 continue;
             }
 
-            //Debug.Log($"AI predicted top moves: {string.Join(", ", topMoves)}");
-
             bool played = false;
-            foreach (string move in topMoves)
+
+            for (int i = 0; i < topMoves.Count; i++)
             {
-                var from = moveHistory.TranslatePositionToSquare(move.Substring(0, 2));
-                var to = moveHistory.TranslatePositionToSquare(move.Substring(2, 2));
-                Debug.LogWarning("About To check if move is legal " + board.gameObject.name);
+                string move = topMoves[i];
+
+                Vector2Int from = moveHistory.TranslatePositionToSquare(move.Substring(0, 2));
+                Vector2Int to = moveHistory.TranslatePositionToSquare(move.Substring(2, 2));
+
                 if (board.IsAIMoveLegal(from, to))
                 {
-                    yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 5f));
-
-                    Debug.Log($"AI plays move: {move}");
+                    //float delay = UnityEngine.Random.Range(2f, 5f);
+                    //yield return new WaitForSeconds(delay);
+                    Debug.Log("AI plays move: " + move);
                     board.MoveAIPiece(from, to);
                     played = true;
                     break;
                 }
-                else
-                {
-                    Debug.Log($"AI move {move} was illegal");
-                }
             }
 
             if (played)
+            {
                 yield break;
+            }
 
             Debug.LogWarning("None of the AI's top predicted moves were legal. Retrying...");
             yield return new WaitForSeconds(0.5f);
         }
     }
+
 
     void ApplyUciMove(float[,,] tensor, string uci)
     {
@@ -114,7 +124,6 @@ public class AIController : MonoBehaviour
 
         if (plane < 0)
         {
-            //Debug.LogError($"No piece found at {uci.Substring(0, 2)} to move!");
             return;
         }
 
@@ -122,7 +131,7 @@ public class AIController : MonoBehaviour
 
         if (uci.Length == 5)
         {
-            char promo = uci[4]; // e.g., 'q'
+            char promo = uci[4];
             var promoMap = new Dictionary<char, int> {
                 {'q', 4}, {'r', 3}, {'b', 2}, {'n', 1}
             };

@@ -24,4 +24,9 @@ public class SceneController : MonoBehaviour
     {
         SceneManager.LoadScene("Default Game Black");
     }
+
+    public void QuitPlatform()
+    {
+        Application.Quit();
+    }
 }

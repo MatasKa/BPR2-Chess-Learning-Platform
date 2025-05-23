@@ -59,6 +59,7 @@ public class UIManager : MonoBehaviour
 
     public void HidePawnPromotionUI(bool white)
     {
+        Debug.Log("Hiding UI");
         int W = (white == true) ? 0 : 1;
         pawnPromotionPopUp[W].SetActive(false);
         playerChoosingProm = false;
@@ -68,14 +69,15 @@ public class UIManager : MonoBehaviour
     {
         return playerChoosingProm;
     }
-
+    /*/
     public void ChangePieceSprite(GameObject piece, int sprite, bool white)
     {
         int changeColor = (white == true) ? 0 : 4;
         SpriteRenderer spriteRenderer = piece.gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = promotionPieces[sprite + changeColor];
+        Debug.Log("changedPiece, Will hide UI");
         HidePawnPromotionUI(white);
-    }
+    }/*/
 
     private void UpdateTimerUI(int min, int sec)
     {
