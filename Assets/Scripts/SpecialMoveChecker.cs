@@ -106,7 +106,7 @@ public class SpecialMoveChecker : MonoBehaviour
     public void PromotePawn(int promotion)
     {
         StartCoroutine(ReplacePieceType(promotion));
-        board.uiManager.ChangePieceSprite(board.GetCurrentPiece().gameObject, promotion, board.GetCurrentPiece().IsWhite());
+        //board.uiManager.ChangePieceSprite(board.GetCurrentPiece().gameObject, promotion, board.GetCurrentPiece().IsWhite());
         //board.turnManager.SwitchTurn(board.GetAllPieceObjects(), board);
     }
 
@@ -128,6 +128,8 @@ public class SpecialMoveChecker : MonoBehaviour
         Piece newPiece = newPieceObj.GetComponent<Piece>();
         newPiece.SetWhite(isWhite);
         newPiece.SetCurrentSquare(pos);
+
+        board.SelectPiece(newPiece);
 
         board.GetAllPieces()[indexPiece] = newPiece;
         board.GetAllPieceObjects()[indexObject] = newPiece.gameObject;

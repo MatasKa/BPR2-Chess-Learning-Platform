@@ -27,11 +27,11 @@ public class AIController : MonoBehaviour
 
         currentTensor = FENToTensor(START_FEN);
 
-        // Let the AI pick its first move
         //string first = ai.PredictMove(currentTensor);
-        //Debug.Log($"AI first move: {first}");
-
-        //ApplyMove(first);
+        if (board.turnManager.IsPlayerWhite() == false)
+        {
+            DoPredictedMove();
+        }
     }
 
     public void DoPredictedMove()
@@ -42,7 +42,10 @@ public class AIController : MonoBehaviour
     {
         while (true)
         {
-            moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
+            if (moveHistory != null)
+            {
+                moveHistory.RebuildTensor(currentTensor, ApplyUciMove, START_FEN, FENToTensor);
+            }
             string[] topMovesRaw = ai.PredictTopMoves(currentTensor, 1500); //2184
 
             // Deduplicate and filter invalid-length moves
@@ -65,7 +68,7 @@ public class AIController : MonoBehaviour
             {
                 var from = moveHistory.TranslatePositionToSquare(move.Substring(0, 2));
                 var to = moveHistory.TranslatePositionToSquare(move.Substring(2, 2));
-
+                Debug.LogWarning("About To check if move is legal " + board.gameObject.name);
                 if (board.IsAIMoveLegal(from, to))
                 {
                     yield return new WaitForSeconds(UnityEngine.Random.Range(2f, 5f));

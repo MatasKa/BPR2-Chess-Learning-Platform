@@ -3,7 +3,7 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     [SerializeField] private UIManager uiManager;
-    [SerializeField] private bool playerSideWhite = true;
+    [SerializeField] private bool playerSideWhite;
     [SerializeField] private Timer timer;
     private bool whiteTurn = true;
 

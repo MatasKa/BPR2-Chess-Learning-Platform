@@ -25,7 +25,7 @@ public class Board : MonoBehaviour
     private bool prevCapState;
     private Piece simCapPiece;
 
-    void Start()
+    void Awake()
     {
         turnManager = gameObject.GetComponent<TurnManager>();
         uiManager = FindAnyObjectByType<UIManager>();
@@ -168,7 +168,6 @@ public class Board : MonoBehaviour
         moveHistory.AddMove(move);
 
 
-        specialMoveChecker.CheckSpecialMoves(ToPos.x.ToString() + ToPos.y.ToString() + "AI");
 
         boardRenderer.ShowLastMove(fromPos, ToPos);
 
@@ -176,6 +175,8 @@ public class Board : MonoBehaviour
         currentPiece.SetCurrentSquare(ToPos);
         currentPiece.transform.position = new Vector3(ToPos.x, ToPos.y, currentPiece.transform.position.z);
         ResetHighlights();
+
+        specialMoveChecker.CheckSpecialMoves(ToPos.x.ToString() + ToPos.y.ToString() + "AI");
 
         turnManager.SwitchTurn(pieceObjects, this);
     }
