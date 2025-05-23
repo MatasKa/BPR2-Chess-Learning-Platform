@@ -14,12 +14,24 @@ public class TurnManager : MonoBehaviour
     public void SwitchTurn(GameObject[] pieces, Board board)
     {
         whiteTurn = !whiteTurn;
+        string PlayerPieceColor = (playerSideWhite == true) ? "White" : "Black";
         //Debug.Log("TurnP " + pieces[0].name);
         foreach (GameObject piece in pieces)
         {
-            //Debug.Log("TurnP " + piece.name);
-            bool shouldEnable = piece.name.Contains("White") == whiteTurn;
-            piece.GetComponent<BoxCollider2D>().enabled = shouldEnable;
+            if (playerSideWhite == whiteTurn)
+            {
+                if (piece.name.Contains(PlayerPieceColor))
+                {
+                    piece.GetComponent<BoxCollider2D>().enabled = true;
+                }
+            }
+            else
+            {
+                if (piece.name.Contains(PlayerPieceColor))
+                {
+                    piece.GetComponent<BoxCollider2D>().enabled = false;
+                }
+            }
         }
 
         if (playerSideWhite == whiteTurn)
@@ -30,7 +42,6 @@ public class TurnManager : MonoBehaviour
         {
             timer.StopTimer();
         }
-        //Debug.Log("turns changed");
         CheckForEndGame(board);
     }
 
