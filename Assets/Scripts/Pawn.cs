@@ -10,6 +10,7 @@ public class Pawn : Piece
     public override List<Vector2Int> PossibleMoves()
     {
         List<Vector2Int> moves = new List<Vector2Int>();
+        Pawn enPassantPawn = null;
 
         int reverse = 1;
         if (white == false)
@@ -47,7 +48,11 @@ public class Pawn : Piece
             }
         }
 
-        Piece enPassantPawn = specialMoveChecker.GetEnPassantTarget();
+        Debug.Log(specialMoveChecker.GetEnPassantTarget());
+        if (specialMoveChecker.GetEnPassantTarget() != null)
+        {
+            enPassantPawn = specialMoveChecker.GetEnPassantTarget().GetComponent<Pawn>();
+        }
 
         if (enPassantPawn != null && enPassantPawn.GetCurrentSquare().y == currentSquare.y)
         {

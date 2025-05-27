@@ -64,12 +64,10 @@ public class Piece : MonoBehaviour
     {
         hasMoved = moved;
     }
-
     public bool GetHasMoved()
     {
         return hasMoved;
     }
-
     public void ShowLegalMoves()
     {
         board.ResetHighlights();
@@ -119,11 +117,8 @@ public class Piece : MonoBehaviour
             return false;
         }
     }
-
     public virtual List<Vector2Int> PossibleMoves()
     {
         return new List<Vector2Int>();
     }
-
-
 }

@@ -24,6 +24,10 @@ public class TurnManager : MonoBehaviour
                 {
                     piece.GetComponent<BoxCollider2D>().enabled = true;
                 }
+                //else
+                //{
+                //    piece.GetComponent<BoxCollider2D>().enabled = false; ///for tests
+                //}
             }
             else
             {
@@ -31,6 +35,10 @@ public class TurnManager : MonoBehaviour
                 {
                     piece.GetComponent<BoxCollider2D>().enabled = false;
                 }
+                //else
+                //{
+                //    piece.GetComponent<BoxCollider2D>().enabled = true;  ///for tests
+                //}
             }
         }
 

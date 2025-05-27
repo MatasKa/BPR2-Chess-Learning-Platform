@@ -20,7 +20,6 @@ public class Board : MonoBehaviour
     private Piece blackKing;
     private Piece currentPiece;
 
-    //for simulating moves
     private Vector2Int prevPos;
     private bool prevCapState;
     private Piece simCapPiece;
@@ -55,10 +54,6 @@ public class Board : MonoBehaviour
         }
         return null;
     }
-    public Piece[] GetPieces()
-    {
-        return pieces;
-    }
     public bool IsInsideBoard(Vector2Int pos)
     {
         return pos.x >= 0 && pos.x < 8 && pos.y >= 0 && pos.y < 8;
@@ -91,10 +86,7 @@ public class Board : MonoBehaviour
     {
         return pieces;
     }
-    public GameObject[] GetAllPieceObjects()
-    {
-        return pieceObjects;
-    }
+    public GameObject[] GetAllPieceObjects() { return pieceObjects; }
     public void MovePlayerPiece(string square)
     {
         int newPosX = int.Parse(square[0].ToString());
@@ -122,7 +114,6 @@ public class Board : MonoBehaviour
         currentPiece.SetHasMoved(true);
         turnManager.SwitchTurn(pieceObjects, this);
     }
-
     public bool IsAIMoveLegal(Vector2Int fromPos, Vector2Int ToPos)
     {
         if (uiManager.IsPlayerChoosingProm() == false)
@@ -151,7 +142,6 @@ public class Board : MonoBehaviour
             return false;
         }
     }
-
     public void MoveAIPiece(Vector2Int fromPos, Vector2Int ToPos)
     {
         currentPiece = GetPieceOnSquare(fromPos);
@@ -180,14 +170,11 @@ public class Board : MonoBehaviour
 
         turnManager.SwitchTurn(pieceObjects, this);
     }
-
     public void CapturePiece(Piece piece)
     {
         piece.SetCaptured(true);
         piece.gameObject.SetActive(false);
     }
-
-
     public bool HasAnyLegalMoves(bool isWhite)
     {
         foreach (Piece piece in pieces)
@@ -204,7 +191,6 @@ public class Board : MonoBehaviour
         }
         return false;
     }
-
     public bool IsKingInCheck(bool isWhite)
     {
         Piece king = isWhite ? whiteKing : blackKing;
@@ -221,7 +207,6 @@ public class Board : MonoBehaviour
         }
         return false;
     }
-
     public void DoSimulatedMove(Piece piece, Vector2Int newPos)
     {
         prevPos = piece.GetCurrentSquare();
@@ -234,7 +219,6 @@ public class Board : MonoBehaviour
         }
         piece.SetCurrentSquare(newPos);
     }
-
     public void UndoSimulatedMove(Piece piece)
     {
         piece.SetCurrentSquare(prevPos);

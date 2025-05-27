@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public class ChessAI : MonoBehaviour
 {
     public NNModel policyOnnxAsset;
-
     private Model _runtimeModel;
     private IWorker _worker;
     private Dictionary<int, string> _intToMove;
@@ -39,7 +38,6 @@ public class ChessAI : MonoBehaviour
             moveList.Add(_intToMove[i]);
         }
     }
-
     public string PredictMove(float[,,] boardTensor)
     {
         float[] flat = FlattenTensor(boardTensor);
@@ -56,7 +54,6 @@ public class ChessAI : MonoBehaviour
 
         return _intToMove[best];
     }
-
     public string[] PredictTopMoves(float[,,] inputTensor, int topN = 10)
     {
         float[] flat = FlattenTensor(inputTensor);
@@ -82,7 +79,6 @@ public class ChessAI : MonoBehaviour
 
         return topMoves.ToArray();
     }
-
     private float[] FlattenTensor(float[,,] tensor)
     {
         int d0 = tensor.GetLength(0);
@@ -98,7 +94,6 @@ public class ChessAI : MonoBehaviour
 
         return flat;
     }
-
     void OnDestroy()
     {
         _worker?.Dispose();

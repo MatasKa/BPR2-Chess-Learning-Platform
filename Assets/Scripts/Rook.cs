@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class Rook : Piece
 {
-    //Don't forget to check castling!!!
-
     public override List<Vector2Int> PossibleMoves()
     {
         List<Vector2Int> moves = new List<Vector2Int>();

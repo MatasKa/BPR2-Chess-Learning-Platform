@@ -69,15 +69,16 @@ public class SpecialMoveChecker : MonoBehaviour
                 king.SetHasMoved(true);
             }
         }
-        if (board.GetCurrentPiece() is Rook rook)
-        {
-            rook.SetHasMoved(true);
-        }
-
+        //if (board.GetCurrentPiece() is Rook rook)
+        //{
+        //    rook.SetHasMoved(true);
+        //}
+        board.GetCurrentPiece().SetHasMoved(true);
     }
-
-
-
+    public Piece GetPieceFromBoard(Vector2Int Pos)
+    {
+        return board.GetPieceOnSquare(Pos);
+    }
     public void CheckEnPassant(Vector2Int newPos, Piece piece)
     {
         if (newPos == enPassantSquare && piece is Pawn)
@@ -87,8 +88,7 @@ public class SpecialMoveChecker : MonoBehaviour
         PrepEnPassantTarget(null, new Vector2Int(-1, -1)); //cant call pawn.IsWhite if pawn is null
         enPassantSquare = new Vector2Int(-1, -1);
     }
-
-    public void PrepEnPassantTarget(Piece pawn, Vector2Int newPos) // could be private
+    public void PrepEnPassantTarget(Piece pawn, Vector2Int newPos)
     {
         if (pawn != null)
         {
@@ -97,20 +97,16 @@ public class SpecialMoveChecker : MonoBehaviour
         }
         enPassantTargetPawn = pawn;
     }
-
     public Piece GetEnPassantTarget()
     {
         return enPassantTargetPawn;
     }
-
-
     public void PromotePawn(int promotion)
     {
         StartCoroutine(ReplacePieceType(promotion));
         //board.uiManager.ChangePieceSprite(board.GetCurrentPiece().gameObject, promotion, board.GetCurrentPiece().IsWhite());
         //board.turnManager.SwitchTurn(board.GetAllPieceObjects(), board);
     }
-
     IEnumerator ReplacePieceType(int promotion)
     {
         int indexPiece = System.Array.IndexOf(board.GetAllPieces(), board.GetCurrentPiece());
@@ -137,20 +133,10 @@ public class SpecialMoveChecker : MonoBehaviour
         board.turnManager.CheckForEndGame(board);
 
     }
-
-
     public bool HasRookMoved(Piece piece)
     {
-        if (piece is Rook rook)
-        {
-            return rook.GetHasMoved();
-        }
-        else
-        {
-            return true;
-        }
+        return piece.GetHasMoved();
     }
-
     public bool PassesCheckKingsideCastle(bool isWhite)
     {
         int Ypos = (isWhite == true) ? 0 : 7;
@@ -184,7 +170,6 @@ public class SpecialMoveChecker : MonoBehaviour
 
         return false;
     }
-
     public bool PassesCheckQueensideCastle(bool isWhite)
     {
         int Ypos = (isWhite == true) ? 0 : 7;

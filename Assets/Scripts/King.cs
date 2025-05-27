@@ -10,18 +10,18 @@ public class King : Piece
         if (base.hasMoved == false)
         {
             //castling 0-0
-            if (board.GetPieceOnSquare(currentSquare + new Vector2Int(1, 0)) == null
-             && board.GetPieceOnSquare(currentSquare + new Vector2Int(2, 0)) == null
-             && specialMoveChecker.HasRookMoved(board.GetPieceOnSquare(currentSquare + new Vector2Int(3, 0))) == false
+            if (specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(1, 0)) == null
+             && specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(2, 0)) == null
+             && specialMoveChecker.HasRookMoved(specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(3, 0))) == false
             && specialMoveChecker.PassesCheckKingsideCastle(white) == false)
             {
                 moves.Add(new Vector2Int(6, currentSquare.y));
             }
             //castling 0-0-0
-            if (board.GetPieceOnSquare(currentSquare + new Vector2Int(-1, 0)) == null
-             && board.GetPieceOnSquare(currentSquare + new Vector2Int(-2, 0)) == null
-             && board.GetPieceOnSquare(currentSquare + new Vector2Int(-3, 0)) == null
-             && specialMoveChecker.HasRookMoved(board.GetPieceOnSquare(currentSquare + new Vector2Int(-4, 0))) == false
+            if (specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(-1, 0)) == null
+             && specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(-2, 0)) == null
+             && specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(-3, 0)) == null
+             && specialMoveChecker.HasRookMoved(specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(-4, 0))) == false
             && specialMoveChecker.PassesCheckQueensideCastle(white) == false)
             {
                 moves.Add(new Vector2Int(1, currentSquare.y));

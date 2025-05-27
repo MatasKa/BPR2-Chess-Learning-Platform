@@ -7,19 +7,15 @@ using System.Linq;
 public class AIController : MonoBehaviour
 {
     public ChessAI ai;
-
     private float[,,] currentTensor;
     private const string START_FEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-
     [SerializeField] private MoveHistory moveHistory;
     [SerializeField] private Board board;
-
 
     void Start()
     {
         if (ai == null)
         {
-            Debug.LogError("Please assign the ChessAI component in the Inspector!");
             enabled = false;
             return;
         }
@@ -40,7 +36,6 @@ public class AIController : MonoBehaviour
     {
         StartCoroutine(DoPredictedMoveCoroutine());
     }
-
     public IEnumerator DoPredictedMoveCoroutine()
     {
         while (true)
@@ -82,8 +77,8 @@ public class AIController : MonoBehaviour
 
                 if (board.IsAIMoveLegal(from, to))
                 {
-                    //float delay = UnityEngine.Random.Range(2f, 5f);
-                    //yield return new WaitForSeconds(delay);
+                    float delay = UnityEngine.Random.Range(2f, 5f);
+                    yield return new WaitForSeconds(delay);
                     Debug.Log("AI plays move: " + move);
                     board.MoveAIPiece(from, to);
                     played = true;
@@ -100,8 +95,6 @@ public class AIController : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
     }
-
-
     void ApplyUciMove(float[,,] tensor, string uci)
     {
         int FileToCol(char f) => f - 'a';
@@ -142,7 +135,6 @@ public class AIController : MonoBehaviour
 
         tensor[toRow, toCol, plane] = 1f;
     }
-
     private float[,,] FENToTensor(string fen)
     {
         var planes = new Dictionary<char, int> {

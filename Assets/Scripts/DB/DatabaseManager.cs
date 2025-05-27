@@ -8,7 +8,6 @@ using System.Text;
 public class DatabaseManager : MonoBehaviour
 {
     private string _dbPath;
-
     void Awake()
     {
         // Determine source and destination paths
@@ -27,7 +26,6 @@ public class DatabaseManager : MonoBehaviour
         }
         _dbPath = persistentPath;
     }
-
 #if UNITY_ANDROID && !UNITY_EDITOR
     private System.Collections.IEnumerator CopyAndroidDb(string src, string dst)
     {
@@ -48,7 +46,6 @@ public class DatabaseManager : MonoBehaviour
         public string username { get; set; }
         public int darkmode { get; set; }
     }
-
     void Start()
     {
         using (var conn = new SQLiteConnection(_dbPath))
@@ -72,7 +69,6 @@ public class DatabaseManager : MonoBehaviour
             return sb.ToString();
         }
     }
-
     public void CreateUser(string username, string email, string password)
     {
         var newUser = new User
@@ -90,7 +86,6 @@ public class DatabaseManager : MonoBehaviour
 
         Debug.Log($"Inserted User with ID={newUser.user_id}");
     }
-
     public void LogAllUsers()
     {
         using (var conn = new SQLiteConnection(_dbPath))
@@ -100,7 +95,6 @@ public class DatabaseManager : MonoBehaviour
                 Debug.Log($"[User] ID={u.user_id} Email={u.email} Username={u.username} Password={u.password_hash}");
         }
     }
-
     public User Login(string username, string password)
     {
         string hPasword = HashPassword(password);
@@ -114,7 +108,6 @@ public class DatabaseManager : MonoBehaviour
             return user;
         }
     }
-
     public void ClearAndResetAllData()
     {
         using (var conn = new SQLiteConnection(_dbPath))
