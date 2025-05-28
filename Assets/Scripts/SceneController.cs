@@ -1,4 +1,4 @@
-using UnityEditor.SearchService;
+//using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,5 +23,10 @@ public class SceneController : MonoBehaviour
     public void LoadDefaultGameBlack()
     {
         SceneManager.LoadScene("Default Game Black");
+    }
+
+    public void QuitPlatform()
+    {
+        Application.Quit();
     }
 }

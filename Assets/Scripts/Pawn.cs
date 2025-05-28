@@ -10,6 +10,7 @@ public class Pawn : Piece
     public override List<Vector2Int> PossibleMoves()
     {
         List<Vector2Int> moves = new List<Vector2Int>();
+        Pawn enPassantPawn = null;
 
         int reverse = 1;
         if (white == false)
@@ -19,15 +20,14 @@ public class Pawn : Piece
 
         // Passive move checks
         Vector2Int newPos = base.currentSquare + new Vector2Int(0, +1 * reverse);
-        if (board.IsInsideBoard(newPos) == true && board.GetPieceOnSquare(newPos) == null)
+        if (CanMoveToSquare(newPos))
         {
             moves.Add(newPos);
 
             newPos = base.currentSquare + new Vector2Int(0, +2 * reverse);
             int yStartPos = (reverse == 1) ? 1 : 6;
-            if (board.GetPieceOnSquare(newPos) == null && currentSquare.y == yStartPos)
+            if (CanMoveToSquare(newPos) && currentSquare.y == yStartPos)
             {
-                //Debug.Log("piece name: " + gameObject.name + ". Is the piece is white? " + white + ". what is its reverse? " + reverse + " . its Y start position is set as " + yStartPos);
                 moves.Add(newPos);
             }
         }
@@ -42,15 +42,17 @@ public class Pawn : Piece
         for (int i = 0; i <= 1; i++)
         {
             newPos = base.currentSquare + AttackDir[i];
-            if (board.IsInsideBoard(newPos))
+            if (CanCapture(this, newPos))
             {
-                Piece temp = board.GetPieceOnSquare(newPos);
-                if (temp != null && board.IsEnemyPiece(this, temp) == true)
-                    moves.Add(newPos);
+                moves.Add(newPos);
             }
         }
 
-        Piece enPassantPawn = board.GetEnPassantTarget();
+        Debug.Log(specialMoveChecker.GetEnPassantTarget());
+        if (specialMoveChecker.GetEnPassantTarget() != null)
+        {
+            enPassantPawn = specialMoveChecker.GetEnPassantTarget().GetComponent<Pawn>();
+        }
 
         if (enPassantPawn != null && enPassantPawn.GetCurrentSquare().y == currentSquare.y)
         {
@@ -62,4 +64,21 @@ public class Pawn : Piece
         }
         return moves;
     }
+
+    public List<Vector2Int> PossibleAttacks()
+    {
+        List<Vector2Int> attacks = new List<Vector2Int>();
+
+        int reverse = 1;
+        if (white == false)
+        {
+            reverse = -1;
+        }
+
+        attacks.Add(base.currentSquare + new Vector2Int(-1, +1 * reverse));
+        attacks.Add(base.currentSquare + new Vector2Int(+1, +1 * reverse));
+
+        return attacks;
+    }
+
 }

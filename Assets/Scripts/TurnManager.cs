@@ -3,7 +3,7 @@ using UnityEngine;
 public class TurnManager : MonoBehaviour
 {
     [SerializeField] private UIManager uiManager;
-    [SerializeField] private bool playerSideWhite = true;
+    [SerializeField] private bool playerSideWhite;
     [SerializeField] private Timer timer;
     private bool whiteTurn = true;
 
@@ -11,24 +11,35 @@ public class TurnManager : MonoBehaviour
     {
         timer.OnTimeEnd += OutOfTime;
     }
-    public bool GetWhiteTurn()
-    {
-        return whiteTurn;
-    }
-
-    public void SetWhiteTurn(bool value)
-    {
-        whiteTurn = value;
-    }
-
-    public void SwitchTurn(Piece[] pieces, Board board)
+    public void SwitchTurn(GameObject[] pieces, Board board)
     {
         whiteTurn = !whiteTurn;
-
-        foreach (Piece piece in pieces)
+        string PlayerPieceColor = (playerSideWhite == true) ? "White" : "Black";
+        //Debug.Log("TurnP " + pieces[0].name);
+        foreach (GameObject piece in pieces)
         {
-            bool shouldEnable = piece.IsWhite() == whiteTurn;
-            piece.GetComponent<BoxCollider2D>().enabled = shouldEnable;
+            if (playerSideWhite == whiteTurn)
+            {
+                if (piece.name.Contains(PlayerPieceColor))
+                {
+                    piece.GetComponent<BoxCollider2D>().enabled = true;
+                }
+                //else
+                //{
+                //    piece.GetComponent<BoxCollider2D>().enabled = false; ///for tests
+                //}
+            }
+            else
+            {
+                if (piece.name.Contains(PlayerPieceColor))
+                {
+                    piece.GetComponent<BoxCollider2D>().enabled = false;
+                }
+                //else
+                //{
+                //    piece.GetComponent<BoxCollider2D>().enabled = true;  ///for tests
+                //}
+            }
         }
 
         if (playerSideWhite == whiteTurn)
@@ -39,23 +50,27 @@ public class TurnManager : MonoBehaviour
         {
             timer.StopTimer();
         }
-
         CheckForEndGame(board);
     }
 
-    public void StopAllPieces(Piece[] pieces)
+    public void StopAllPieces(GameObject[] pieces)
     {
-        foreach (Piece piece in pieces)
+        foreach (GameObject piece in pieces)
         {
             piece.GetComponent<BoxCollider2D>().enabled = false;
         }
+    }
+
+    public bool IsPlayerWhite()
+    {
+        return playerSideWhite;
     }
 
     private void OutOfTime()
     {
         uiManager.ShowGameEndUI(4);
     }
-    private void CheckForEndGame(Board board)
+    public void CheckForEndGame(Board board)
     {
         if (board.HasAnyLegalMoves(whiteTurn) == false)
         {
@@ -68,7 +83,8 @@ public class TurnManager : MonoBehaviour
             {
                 uiManager.ShowGameEndUI(3);
             }
-            StopAllPieces(board.GetPieces());
+            StopAllPieces(board.GetAllPieceObjects());
         }
     }
+
 }

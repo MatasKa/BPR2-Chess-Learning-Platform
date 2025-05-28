@@ -1,19 +1,25 @@
 using System.Collections.Generic;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 public class Piece : MonoBehaviour
 {
     [SerializeField] protected Vector2Int currentSquare;
-    protected Board board;
+    [SerializeField] protected bool white = false;
+    [SerializeField] protected Board board;
+    [SerializeField] protected SpecialMoveChecker specialMoveChecker;
     protected bool selected = false;
     protected bool captured = false;
-    [SerializeField] protected bool white = false;
+    protected bool hasMoved = false;
 
-    void Awake()
+    private void Awake()
     {
-        board = FindAnyObjectByType<Board>();
+        if (board == null || specialMoveChecker == null)
+        {
+            board = FindAnyObjectByType<Board>();
+            specialMoveChecker = FindAnyObjectByType<SpecialMoveChecker>();
+        }
     }
-
     private void OnMouseDown()
     {
         if (captured == false)
@@ -22,7 +28,6 @@ public class Piece : MonoBehaviour
             ShowLegalMoves();
         }
     }
-
     public bool IsSelected()
     {
         return selected;
@@ -35,19 +40,17 @@ public class Piece : MonoBehaviour
     {
         return white;
     }
-
     public void SetWhite(bool w)
     {
         white = w;
     }
-
-    public void SetCaptured(bool cap)
-    {
-        captured = cap;
-    }
     public bool IsCaptured()
     {
         return captured;
+    }
+    public void SetCaptured(bool cap)
+    {
+        captured = cap;
     }
     public Vector2Int GetCurrentSquare()
     {
@@ -57,12 +60,14 @@ public class Piece : MonoBehaviour
     {
         currentSquare = square;
     }
-
-    public virtual List<Vector2Int> PossibleMoves()
+    public void SetHasMoved(bool moved)
     {
-        return new List<Vector2Int>();
+        hasMoved = moved;
     }
-
+    public bool GetHasMoved()
+    {
+        return hasMoved;
+    }
     public void ShowLegalMoves()
     {
         board.ResetHighlights();
@@ -76,7 +81,6 @@ public class Piece : MonoBehaviour
             }
         }
     }
-
     public bool IsMoveLegal(Vector2Int targetPos)
     {
         board.DoSimulatedMove(this, targetPos);
@@ -84,5 +88,37 @@ public class Piece : MonoBehaviour
         board.UndoSimulatedMove(this);
 
         return !inCheck;
+    }
+    public bool CanMoveToSquare(Vector2Int pos)
+    {
+        if (board == null || specialMoveChecker == null)
+        {
+            board = FindAnyObjectByType<Board>();
+            specialMoveChecker = FindAnyObjectByType<SpecialMoveChecker>();
+        }
+
+        if (board.IsInsideBoard(pos) && (board.GetPieceOnSquare(pos) == null))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public bool CanCapture(Piece piece, Vector2Int pos)
+    {
+        if (board.GetPieceOnSquare(pos) != null && board.IsEnemyPiece(piece, board.GetPieceOnSquare(pos)))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public virtual List<Vector2Int> PossibleMoves()
+    {
+        return new List<Vector2Int>();
     }
 }

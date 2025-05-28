@@ -19,20 +19,18 @@ public class Bishop : Piece
             for (int o = 1; o <= 8; o++)
             {
                 Vector2Int newPos = base.currentSquare + directions[i] * o;
-                if (board.IsInsideBoard(newPos))
+                if (CanMoveToSquare(newPos))
                 {
-
-                    Piece temp = board.GetPieceOnSquare(newPos);
-                    if (temp == null)
-                    {
-                        moves.Add(newPos);
-                    }
-                    else
-                    {
-                        if (board.IsEnemyPiece(this, temp))
-                            moves.Add(newPos);
-                        break;
-                    }
+                    moves.Add(newPos);
+                }
+                else if (CanCapture(this, newPos))
+                {
+                    moves.Add(newPos);
+                    break;
+                }
+                else
+                {
+                    break;
                 }
             }
         }

@@ -1,15 +1,14 @@
 using System;
 using TMPro;
-using UnityEditor.ShaderGraph;
 using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
     public float timeLeft = 600f;
+    public event Action OnTimeEnd;
     private bool isPaused = true;
     private int min = 10;
     private int sec = 0;
-    public event Action OnTimeEnd;
 
     void Update()
     {

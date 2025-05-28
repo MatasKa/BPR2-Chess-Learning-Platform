@@ -21,13 +21,9 @@ public class Knight : Piece
         foreach (Vector2Int dir in directions)
         {
             Vector2Int newPos = currentSquare + dir;
-            if (board.IsInsideBoard(newPos))
+            if (CanMoveToSquare(newPos) || CanCapture(this, newPos))
             {
-                Piece temp = board.GetPieceOnSquare(newPos);
-                if (temp == null || board.IsEnemyPiece(this, temp))
-                {
-                    moves.Add(newPos);
-                }
+                moves.Add(newPos);
             }
         }
 

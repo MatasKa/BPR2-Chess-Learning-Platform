@@ -3,33 +3,34 @@ using UnityEngine;
 
 public class King : Piece
 {
-    private bool hasMoved = false;
-    //private bool canCastleKingside = false;
-    //private bool canCastleQueenside = false;
     public override List<Vector2Int> PossibleMoves()
     {
-        Debug.Log(gameObject.name + " tuoj ziures possibleMoves");
-
         List<Vector2Int> moves = StandartMoves();
 
-        if (hasMoved == false)
+        if (base.hasMoved == false)
         {
-            //castling 0-0
-            if (board.GetPieceOnSquare(currentSquare + new Vector2Int(1, 0)) == null
-             && board.GetPieceOnSquare(currentSquare + new Vector2Int(2, 0)) == null
-             && board.HasRookMoved(board.GetPieceOnSquare(currentSquare + new Vector2Int(3, 0))) == false
-            && board.PassesCheckWhenKingsideCastle(white) == false)
+            if (specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(3, 0)) != null)
             {
-                moves.Add(new Vector2Int(6, currentSquare.y));
+                //castling 0-0
+                if (specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(1, 0)) == null
+                 && specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(2, 0)) == null
+                 && specialMoveChecker.HasRookMoved(specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(3, 0))) == false
+                && specialMoveChecker.PassesCheckKingsideCastle(white) == false)
+                {
+                    moves.Add(new Vector2Int(6, currentSquare.y));
+                }
             }
-            //castling 0-0-0
-            if (board.GetPieceOnSquare(currentSquare + new Vector2Int(-1, 0)) == null
-             && board.GetPieceOnSquare(currentSquare + new Vector2Int(-2, 0)) == null
-             && board.GetPieceOnSquare(currentSquare + new Vector2Int(-3, 0)) == null
-             && board.HasRookMoved(board.GetPieceOnSquare(currentSquare + new Vector2Int(-4, 0))) == false
-            && board.PassesCheckWhenKingsideCastle(white) == false)
+            if (specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(-4, 0)) != null)
             {
-                moves.Add(new Vector2Int(1, currentSquare.y));
+                //castling 0-0-0
+                if (specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(-1, 0)) == null
+                && specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(-2, 0)) == null
+                && specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(-3, 0)) == null
+                && specialMoveChecker.HasRookMoved(specialMoveChecker.GetPieceFromBoard(currentSquare + new Vector2Int(-4, 0))) == false
+                && specialMoveChecker.PassesCheckQueensideCastle(white) == false)
+                {
+                    moves.Add(new Vector2Int(1, currentSquare.y));
+                }
             }
         }
         return moves;
@@ -54,24 +55,11 @@ public class King : Piece
         {
             Vector2Int newPos = base.currentSquare + dir;
 
-            if (board.IsInsideBoard(newPos))
+            if (CanMoveToSquare(newPos) || CanCapture(this, newPos))
             {
-                Piece temp = board.GetPieceOnSquare(newPos);
-                if (temp == null || board.IsEnemyPiece(this, temp))
-                {
-                    moves.Add(newPos);
-                }
+                moves.Add(newPos);
             }
         }
         return moves;
-    }
-
-    public void SetHasMoved(bool moved)
-    {
-        hasMoved = moved;
-    }
-    public bool GetHasMoved()
-    {
-        return hasMoved;
     }
 }

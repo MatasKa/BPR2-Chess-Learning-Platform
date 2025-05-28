@@ -8,35 +8,41 @@ using UnityEngine.UI;
 public class Board : MonoBehaviour
 {
     [SerializeField] private BoardRenderer boardRenderer;
-    [SerializeField] private TurnManager turnManager;
-    [SerializeField] private UIManager uiManager;
+    [SerializeField] private MoveHistory moveHistory;
+    [SerializeField] private SpecialMoveChecker specialMoveChecker;
+
+    public TurnManager turnManager { get; set; }
+    public UIManager uiManager { get; set; }
 
     private Piece[] pieces;
-    private King whiteKing;
-    private King blackKing;
+    private GameObject[] pieceObjects;
+    private Piece whiteKing;
+    private Piece blackKing;
     private Piece currentPiece;
 
-
-    //for simulating moves
     private Vector2Int prevPos;
     private bool prevCapState;
     private Piece simCapPiece;
 
-    private Piece enPassantTargetPawn = null;
-    private Vector2Int enPassantSquare;
-
-    void Start()
+    void Awake()
     {
+        turnManager = gameObject.GetComponent<TurnManager>();
+        uiManager = FindAnyObjectByType<UIManager>();
         pieces = FindObjectsByType<Piece>(FindObjectsSortMode.None);
-        whiteKing = GameObject.Find("White King").GetComponent<King>();
-        blackKing = GameObject.Find("Black King").GetComponent<King>();
-    }
+        whiteKing = GameObject.Find("White King").GetComponent<Piece>();
+        blackKing = GameObject.Find("Black King").GetComponent<Piece>();
+        pieceObjects = new GameObject[pieces.Length];
+        for (int i = 0; i < pieces.Length; i++)
+        {
+            pieceObjects[i] = pieces[i].gameObject;
+        }
+        //Debug.Log("Board " + pieceObjects[0].name);
 
+    }
     public void Highlight(Vector2Int square)
     {
         boardRenderer.Highlight(square);
     }
-
     public Piece GetPieceOnSquare(Vector2Int checkPos)
     {
         foreach (Piece piece in pieces)
@@ -48,55 +54,19 @@ public class Board : MonoBehaviour
         }
         return null;
     }
-    public Piece[] GetPieces()
-    {
-        return pieces;
-    }
-
     public bool IsInsideBoard(Vector2Int pos)
     {
         return pos.x >= 0 && pos.x < 8 && pos.y >= 0 && pos.y < 8;
     }
-
     public bool IsEnemyPiece(Piece current, Piece other)
     {
         return current.IsWhite() != other.IsWhite();
     }
-
-    public void PrepEnPassantTarget(Piece pawn, Vector2Int newPos) // could be private
-    {
-        if (pawn != null)
-        {
-            int dir = (pawn.IsWhite() == true) ? -1 : 1;
-            enPassantSquare = new Vector2Int(newPos.x, newPos.y + dir);
-        }
-        enPassantTargetPawn = pawn;
-        //Debug.Log("en passant Target set: " + enPassantTargetPawn.name);
-        //Debug.Log("en passant Square set: " + enPassantSquare);
-    }
-
-    public Piece GetEnPassantTarget()
-    {
-        return enPassantTargetPawn;
-    }
-
-    public void CheckEnPassant(Vector2Int newPos, Piece piece)
-    {
-        if (newPos == enPassantSquare && piece is Pawn)
-        {
-            CapturePiece(enPassantTargetPawn);
-        }
-        PrepEnPassantTarget(null, new Vector2Int(-1, -1)); //cant call pawn.IsWhite if pawn is null
-        enPassantSquare = new Vector2Int(-1, -1);
-    }
-
-
     public void ResetHighlights()
     {
         boardRenderer.ResetHighlights();
     }
-
-    public void SelectPiece(Piece sellectPiece)
+    public void SelectPiece(Piece selectPiece)
     {
         foreach (Piece piece in pieces)
         {
@@ -105,11 +75,19 @@ public class Board : MonoBehaviour
                 piece.SetSelected(false);
             }
         }
-        currentPiece = sellectPiece;
+        currentPiece = selectPiece;
         currentPiece.SetSelected(true);
     }
-
-    public void MovePiece(string square) //MOOOOOOOOOOVEEEEEEEEEEE
+    public Piece GetCurrentPiece()
+    {
+        return currentPiece;
+    }
+    public Piece[] GetAllPieces()
+    {
+        return pieces;
+    }
+    public GameObject[] GetAllPieceObjects() { return pieceObjects; }
+    public void MovePlayerPiece(string square)
     {
         int newPosX = int.Parse(square[0].ToString());
         int newPosY = int.Parse(square[1].ToString());
@@ -122,175 +100,79 @@ public class Board : MonoBehaviour
             CapturePiece(maybeEnemyPiece);
         }
 
-        //En Passant checks
-        CheckEnPassant(newPos, currentPiece);
-        if ((newPos.y - currentPiece.GetCurrentSquare().y == 2 || newPos.y - currentPiece.GetCurrentSquare().y == -2) && currentPiece is Pawn)
-        {
-            PrepEnPassantTarget(currentPiece, newPos);
-        }
+        //add move to history of moves
+        string move = moveHistory.TranslateMoveToUci(currentPiece.GetCurrentSquare(), newPos);
+        moveHistory.AddMove(move);
 
+        boardRenderer.ShowLastMove(currentPiece.GetCurrentSquare(), newPos);
         //moving the piece
         currentPiece.SetCurrentSquare(newPos);
         currentPiece.transform.position = new Vector3(newPosX, newPosY, currentPiece.transform.position.z);
-
         ResetHighlights();
 
-        //Check for Pawn promotion
-        if (currentPiece is Pawn && (currentPiece.GetCurrentSquare().y == 0 || currentPiece.GetCurrentSquare().y == 7))
+        //Debug.Log("Will change turns soon");
+        currentPiece.SetHasMoved(true);
+        turnManager.SwitchTurn(pieceObjects, this);
+    }
+    public bool IsAIMoveLegal(Vector2Int fromPos, Vector2Int ToPos)
+    {
+        if (uiManager.IsPlayerChoosingProm() == false)
         {
-            Debug.Log(currentPiece.GetCurrentSquare());
-            uiManager.ShowPawnPromotionUI(currentPiece.GetCurrentSquare(), currentPiece.IsWhite());
-            turnManager.StopAllPieces(pieces);
-            return;
-        }
-
-        //Castling
-
-        if (currentPiece is King king)
-        {
-            if (king.GetHasMoved() == false)
+            if (GetPieceOnSquare(fromPos) != null)
             {
-                int Ypos = (king.IsWhite() == true) ? 0 : 7;
-                new Vector2Int(6, Ypos);
-
-                //kingside
-                if (newPos == new Vector2Int(6, Ypos))
+                if (GetPieceOnSquare(fromPos).PossibleMoves().Contains(ToPos) && turnManager.IsPlayerWhite() != GetPieceOnSquare(fromPos).IsWhite() && GetPieceOnSquare(fromPos).IsMoveLegal(ToPos))
                 {
-                    GetPieceOnSquare(new Vector2Int(7, Ypos)).transform.position = new Vector3(5, Ypos, GetPieceOnSquare(new Vector2Int(7, Ypos)).transform.position.z);
-                    GetPieceOnSquare(new Vector2Int(7, Ypos)).SetCurrentSquare(new Vector2Int(5, Ypos));
+                    return true;
                 }
-
-                //queenside
-                if (newPos == new Vector2Int(1, Ypos))
+                else
                 {
-                    GetPieceOnSquare(new Vector2Int(0, Ypos)).transform.position = new Vector3(2, Ypos, GetPieceOnSquare(new Vector2Int(0, Ypos)).transform.position.z);
-                    GetPieceOnSquare(new Vector2Int(0, Ypos)).SetCurrentSquare(new Vector2Int(0, Ypos));
+                    //Debug.Log("AI bande judint " + GetPieceOnSquare(fromPos).name + " iš " + fromPos + " į " + ToPos);
+                    return false;
                 }
-                king.SetHasMoved(true);
             }
-        }
-        if (currentPiece is Rook rook)
-        {
-            rook.SetHasMoved(true);
-        }
+            else
+            {
+                //Debug.Log("AI bande judint nieka iš " + fromPos + " į " + ToPos);
+                return false;
 
-        turnManager.SwitchTurn(pieces, this);
-    }
-
-    public void PromotePawn(int promotion)
-    {
-        StartCoroutine(ReplacePieceType(promotion));
-        uiManager.ChangePieceSprite(currentPiece, promotion, currentPiece.IsWhite());
-        turnManager.SwitchTurn(pieces, this);
-    }
-
-    IEnumerator ReplacePieceType(int promotion)
-    {
-        //promotions: 0 - Queen, 1 - Rook, 2 - Bishop, 3 - Knight
-        int index = System.Array.IndexOf(pieces, currentPiece);
-        Vector2Int pos = currentPiece.GetCurrentSquare();
-        bool white = currentPiece.IsWhite();
-        Destroy(currentPiece.gameObject.GetComponent<Pawn>());
-        if (promotion == 0)
-        {
-            currentPiece.gameObject.AddComponent<Queen>();
-            pieces[index] = currentPiece.GetComponent<Queen>();
-        }
-        else if (promotion == 1)
-        {
-            currentPiece.gameObject.AddComponent<Rook>();
-            pieces[index] = currentPiece.GetComponent<Rook>();
-
-        }
-        else if (promotion == 2)
-        {
-            currentPiece.gameObject.AddComponent<Bishop>();
-            pieces[index] = currentPiece.GetComponent<Bishop>();
-
+            }
         }
         else
         {
-            currentPiece.gameObject.AddComponent<Knight>();
-            pieces[index] = currentPiece.GetComponent<Knight>();
+            return false;
+        }
+    }
+    public void MoveAIPiece(Vector2Int fromPos, Vector2Int ToPos)
+    {
+        currentPiece = GetPieceOnSquare(fromPos);
 
+        //capture piece if there is one
+        Piece maybeEnemyPiece = GetPieceOnSquare(ToPos);
+        if (maybeEnemyPiece != null && IsEnemyPiece(currentPiece, maybeEnemyPiece))
+        {
+            CapturePiece(maybeEnemyPiece);
         }
 
-        pieces[index].SetWhite(white);
-        pieces[index].SetCurrentSquare(pos);
+        //add move to history of moves
+        string move = moveHistory.TranslateMoveToUci(fromPos, ToPos);
+        moveHistory.AddMove(move);
 
-        yield return null;
+        boardRenderer.ShowLastMove(fromPos, ToPos);
+
+        //moving the piece
+        currentPiece.SetCurrentSquare(ToPos);
+        currentPiece.transform.position = new Vector3(ToPos.x, ToPos.y, currentPiece.transform.position.z);
+        ResetHighlights();
+
+        specialMoveChecker.CheckSpecialMoves(ToPos.x.ToString() + ToPos.y.ToString() + "AI");
+
+        turnManager.SwitchTurn(pieceObjects, this);
     }
-
     public void CapturePiece(Piece piece)
     {
         piece.SetCaptured(true);
         piece.gameObject.SetActive(false);
     }
-
-    public bool HasRookMoved(Piece piece)
-    {
-        if (piece is Rook rook)
-        {
-            return rook.GetHasMoved();
-        }
-        else
-        {
-            return true;
-        }
-    }
-
-    //checks if king does not pass (and enter) a check when castling (Kingside)
-    public bool PassesCheckWhenKingsideCastle(bool isWhite)
-    {
-        int Ypos = (isWhite == true) ? 0 : 7;
-        foreach (Piece piece in pieces)
-        {
-            if (!piece.IsCaptured() && piece.IsWhite() != isWhite)
-            {
-                List<Vector2Int> moves;
-                if (piece is King king)
-                {
-                    moves = king.StandartMoves();
-                }
-                else
-                {
-                    moves = piece.PossibleMoves();
-                }
-                if (moves.Contains(new Vector2Int(4, Ypos))
-                || moves.Contains(new Vector2Int(5, Ypos))
-                || moves.Contains(new Vector2Int(6, Ypos)))
-                    return true;
-            }
-        }
-        return false;
-    }
-
-    public bool PassesCheckWhenQueensideCastle(bool isWhite)
-    {
-        int Ypos = (isWhite == true) ? 0 : 7;
-        foreach (Piece piece in pieces)
-        {
-            if (!piece.IsCaptured() && piece.IsWhite() != isWhite)
-            {
-                List<Vector2Int> moves;
-                if (piece is King king)
-                {
-                    moves = king.StandartMoves();
-                }
-                else
-                {
-                    moves = piece.PossibleMoves();
-                }
-                if (moves.Contains(new Vector2Int(1, Ypos))
-                || moves.Contains(new Vector2Int(2, Ypos))
-                || moves.Contains(new Vector2Int(3, Ypos))
-                || moves.Contains(new Vector2Int(4, Ypos)))
-                    return true;
-            }
-        }
-        return false;
-    }
-
     public bool HasAnyLegalMoves(bool isWhite)
     {
         foreach (Piece piece in pieces)
@@ -307,12 +189,11 @@ public class Board : MonoBehaviour
         }
         return false;
     }
-
     public bool IsKingInCheck(bool isWhite)
     {
         Piece king = isWhite ? whiteKing : blackKing;
         Vector2Int kingPos = king.GetCurrentSquare();
-        Debug.Log(king.gameObject.name + " IsKingInCheck");
+        //Debug.Log(king.gameObject.name + " IsKingInCheck");
         foreach (Piece piece in pieces)
         {
             if (!piece.IsCaptured() && piece.IsWhite() != isWhite)
@@ -322,38 +203,28 @@ public class Board : MonoBehaviour
                     return true;
             }
         }
-
         return false;
     }
-
     public void DoSimulatedMove(Piece piece, Vector2Int newPos)
     {
         prevPos = piece.GetCurrentSquare();
         simCapPiece = GetPieceOnSquare(newPos);
-
         if (simCapPiece != null)
         {
             prevCapState = simCapPiece.IsCaptured();
             simCapPiece.SetCaptured(true);
             simCapPiece.gameObject.SetActive(false);
         }
-
         piece.SetCurrentSquare(newPos);
-        //piece.transform.position = new Vector3(newPos.x, newPos.y, piece.transform.position.z);
     }
-
     public void UndoSimulatedMove(Piece piece)
     {
-
         piece.SetCurrentSquare(prevPos);
-        //piece.transform.position = new Vector3(prevPos.x, prevPos.y, piece.transform.position.z);
-
         if (simCapPiece != null)
         {
             simCapPiece.SetCaptured(prevCapState);
             simCapPiece.gameObject.SetActive(true);
         }
-
         simCapPiece = null;
     }
 }

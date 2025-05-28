@@ -12,6 +12,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] pawnPromotionPopUp;
     [SerializeField] private Sprite[] promotionPieces;
 
+    private bool playerChoosingProm = false;
+
     void Update()
     {
         if (timerUI != null && endScreen.activeSelf == false)
@@ -49,22 +51,23 @@ public class UIManager : MonoBehaviour
     {
         int W = (white == true) ? 0 : 1;
         pawnPromotionPopUp[W].SetActive(true);
-        float offset = (UIpos.y == 0) ? -1.25f : 1.25f;
+        float offset = (UIpos.y == 1) ? -2.35f : 2.35f;
+        //Debug.Log("Y pos yr " + UIpos.y + " therefore offset is " + offset);
         pawnPromotionPopUp[W].transform.position = new Vector3(UIpos.x, UIpos.y + offset, pawnPromotionPopUp[W].transform.position.z);
+        playerChoosingProm = true;
     }
 
     public void HidePawnPromotionUI(bool white)
     {
+        Debug.Log("Hiding UI");
         int W = (white == true) ? 0 : 1;
         pawnPromotionPopUp[W].SetActive(false);
+        playerChoosingProm = false;
     }
 
-    public void ChangePieceSprite(Piece piece, int sprite, bool white)
+    public bool IsPlayerChoosingProm()
     {
-        int changeColor = (white == true) ? 0 : 4;
-        SpriteRenderer spriteRenderer = piece.gameObject.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = promotionPieces[sprite + changeColor];
-        HidePawnPromotionUI(white);
+        return playerChoosingProm;
     }
 
     private void UpdateTimerUI(int min, int sec)
