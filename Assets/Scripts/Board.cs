@@ -126,13 +126,13 @@ public class Board : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("AI bande judint " + GetPieceOnSquare(fromPos).name + " iš " + fromPos + " į " + ToPos);
+                    //Debug.Log("AI bande judint " + GetPieceOnSquare(fromPos).name + " iš " + fromPos + " į " + ToPos);
                     return false;
                 }
             }
             else
             {
-                Debug.Log("AI bande judint nieka iš " + fromPos + " į " + ToPos);
+                //Debug.Log("AI bande judint nieka iš " + fromPos + " į " + ToPos);
                 return false;
 
             }
@@ -156,8 +156,6 @@ public class Board : MonoBehaviour
         //add move to history of moves
         string move = moveHistory.TranslateMoveToUci(fromPos, ToPos);
         moveHistory.AddMove(move);
-
-
 
         boardRenderer.ShowLastMove(fromPos, ToPos);
 
